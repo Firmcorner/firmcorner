@@ -1,0 +1,693 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Menu,
+  X,
+  Building2,
+  Smartphone,
+  Star,
+  Heart,
+  Target,
+  Rocket,
+  ArrowRight,
+  Sparkles,
+  TrendingUp,
+  Users,
+  Zap,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const brands = [
+  { name: "Apple", icon: "🍎" },
+  { name: "Nike", icon: "✓" },
+  { name: "McDonald's", icon: "🍟" },
+  { name: "Coca-Cola", icon: "🥤" },
+];
+
+const features = [
+  {
+    icon: Building2,
+    title: "Create Brand Profiles",
+    description:
+      "Build unlimited brand profiles and showcase your products to millions of users worldwide",
+    color: "from-blue-500 to-cyan-500",
+  },
+  {
+    icon: Smartphone,
+    title: "Smart Categories",
+    description:
+      "Organize products with categories and subcategories - from Electronics to Fashion and beyond",
+    color: "from-purple-500 to-pink-500",
+  },
+  {
+    icon: Star,
+    title: "User Voting System",
+    description:
+      "Let users vote for their favorite brands and see real-time rankings based on community preferences",
+    color: "from-yellow-500 to-orange-500",
+  },
+  {
+    icon: Heart,
+    title: "Follow & Like",
+    description:
+      "Follow your favorite brands and like products just like social media - stay updated with latest releases",
+    color: "from-red-500 to-pink-500",
+  },
+  {
+    icon: Target,
+    title: "Targeted Discovery",
+    description:
+      "Find exactly what you're looking for with our intelligent category-based product discovery",
+    color: "from-green-500 to-emerald-500",
+  },
+  {
+    icon: Rocket,
+    title: "Instagram-Style Feed",
+    description:
+      "Browse products in a beautiful, familiar feed format that makes discovery fun and engaging",
+    color: "from-indigo-500 to-purple-500",
+  },
+];
+
+const steps = [
+  {
+    number: 1,
+    title: "Register & Create",
+    description:
+      "Sign up and create unlimited brand profiles for your business",
+  },
+  {
+    number: 2,
+    title: "Post Products",
+    description:
+      "Upload products with categories and subcategories to reach the right audience",
+  },
+  {
+    number: 3,
+    title: "Get Discovered",
+    description:
+      "Users discover your brand through category browsing and voting systems",
+  },
+  {
+    number: 4,
+    title: "Build Community",
+    description:
+      "Gain followers, likes, and climb the rankings to become a top brand",
+  },
+];
+
+const trustedBrands = [
+  "Microsoft",
+  "Apple",
+  "H&M",
+  "LG",
+  "Samsung",
+  "Nike",
+  "Adidas",
+  "Sony",
+];
+
+export default function FirmCornerLanding() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  // Don't render animations until mounted to prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-x-hidden">
+        {/* Static version for SSR */}
+        <header className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md">
+          <nav
+            className="container mx-auto px-4 py-4 flex justify-between items-center"
+            role="navigation"
+            aria-label="Main navigation"
+          >
+            <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              FirmCorner
+            </div>
+            <div className="hidden md:flex space-x-8">
+              {["Features", "Brands", "How It Works"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                  className="hover:text-purple-400 transition-colors"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              aria-label="Open mobile menu"
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
+          </nav>
+        </header>
+
+        <main>
+          <section className="min-h-screen flex items-center justify-center relative pt-20">
+            <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-8">
+                <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+                  <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
+                    Discover
+                  </span>
+                  <br />
+                  <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Amazing Brands
+                  </span>
+                </h1>
+                <p className="text-xl text-gray-300 leading-relaxed">
+                  Connect with top brands, explore products by category, and
+                  vote for your favorites in one powerful platform
+                </p>
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-6 text-lg rounded-full"
+                  asChild
+                >
+                  <a
+                    href="https://app.firmcorner.com"
+                    aria-label="Get started with FirmCorner brand discovery platform"
+                  >
+                    Get Started Now
+                    <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-x-hidden">
+      {/* Animated Background */}
+      <div
+        className="fixed inset-0 overflow-hidden pointer-events-none"
+        aria-hidden="true"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
+        {[...Array(50)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full opacity-20"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -100, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 10,
+              repeat: Number.POSITIVE_INFINITY,
+              delay: Math.random() * 10,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Header */}
+      <motion.header
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+          scrollY > 50 ? "bg-black/80 backdrop-blur-md" : "bg-transparent"
+        }`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <nav
+          className="container mx-auto px-4 py-4 flex justify-between items-center"
+          role="navigation"
+          aria-label="Main navigation"
+        >
+          <motion.div
+            className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+            whileHover={{ scale: 1.05 }}
+          >
+            <a href="/" aria-label="FirmCorner home">
+              FirmCorner
+            </a>
+          </motion.div>
+
+          <div className="hidden md:flex space-x-8">
+            {["Features", "Brands", "How It Works"].map((item) => (
+              <motion.a
+                key={item}
+                href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                className="hover:text-purple-400 transition-colors"
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 0 }}
+              >
+                {item}
+              </motion.a>
+            ))}
+          </div>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={toggleMobileMenu}
+            aria-label="Toggle mobile menu"
+          >
+            <AnimatePresence mode="wait">
+              {mobileMenuOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X className="h-6 w-6" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu className="h-6 w-6" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </Button>
+        </nav>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              className="md:hidden bg-black/95 backdrop-blur-md"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              role="menu"
+            >
+              <div className="container mx-auto px-4 py-6 space-y-4">
+                {["Features", "Brands", "How It Works"].map((item, index) => (
+                  <motion.a
+                    key={item}
+                    href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                    className="block text-lg hover:text-purple-400 transition-colors"
+                    initial={{ x: -50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                    onClick={() => setMobileMenuOpen(false)}
+                    role="menuitem"
+                  >
+                    {item}
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+
+      <main>
+        {/* Hero Section */}
+        <section
+          className="min-h-screen flex items-center justify-center relative pt-20"
+          aria-labelledby="hero-heading"
+        >
+          <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              className="space-y-8"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h1
+                id="hero-heading"
+                className="text-5xl md:text-7xl font-bold leading-tight"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
+                  Discover
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  Amazing Brands
+                </span>
+              </motion.h1>
+
+              <motion.p
+                className="text-xl text-gray-300 leading-relaxed"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                Connect with top brands, explore products by category, and vote
+                for your favorites in one powerful platform. Join over 10,000
+                brands building their communities.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-6 text-lg rounded-full group"
+                  asChild
+                >
+                  <motion.a
+                    href="https://app.firmcorner.com"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label="Start using FirmCorner brand discovery platform"
+                  >
+                    Get Started Now
+                    <motion.div
+                      className="ml-2 inline-block"
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Number.POSITIVE_INFINITY,
+                      }}
+                    >
+                      <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                    </motion.div>
+                  </motion.a>
+                </Button>
+              </motion.div>
+
+              <motion.div
+                className="flex items-center space-x-6 pt-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+              >
+                <div className="flex items-center space-x-2">
+                  <TrendingUp
+                    className="h-5 w-5 text-green-400"
+                    aria-hidden="true"
+                  />
+                  <span className="text-sm text-gray-400">Growing Fast</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Users className="h-5 w-5 text-blue-400" aria-hidden="true" />
+                  <span className="text-sm text-gray-400">10K+ Brands</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Zap className="h-5 w-5 text-yellow-400" aria-hidden="true" />
+                  <span className="text-sm text-gray-400">Real-time</span>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <div className="grid grid-cols-2 gap-4">
+                {brands.map((brand, index) => (
+                  <motion.div
+                    key={brand.name}
+                    initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                    transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                    whileHover={{
+                      scale: 1.1,
+                      rotate: 5,
+                      transition: { duration: 0.2 },
+                    }}
+                  >
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/20 transition-all duration-300">
+                      <CardContent className="p-6 text-center">
+                        <div className="text-4xl mb-2" aria-hidden="true">
+                          {brand.icon}
+                        </div>
+                        <div className="font-semibold">{brand.name}</div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section
+          id="features"
+          className="py-20 relative"
+          aria-labelledby="features-heading"
+        >
+          <div className="container mx-auto px-4">
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2
+                id="features-heading"
+                className="text-4xl md:text-5xl font-bold mb-4"
+              >
+                Why Choose{" "}
+                <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  FirmCorner?
+                </span>
+              </h2>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                Everything you need to build, grow, and showcase your brand in
+                one powerful platform
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {features.map((feature, index) => (
+                <motion.article
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -10 }}
+                >
+                  <Card className="bg-white/5 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300 h-full group">
+                    <CardContent className="p-8">
+                      <motion.div
+                        className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <feature.icon
+                          className="h-8 w-8 text-white"
+                          aria-hidden="true"
+                        />
+                      </motion.div>
+                      <h3 className="text-xl font-bold mb-4">
+                        {feature.title}
+                      </h3>
+                      <p className="text-gray-400 leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Brands Showcase */}
+        <section
+          id="brands"
+          className="py-20 bg-white/5"
+          aria-labelledby="brands-heading"
+        >
+          <div className="container mx-auto px-4">
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2
+                id="brands-heading"
+                className="text-4xl md:text-5xl font-bold mb-4"
+              >
+                Trusted by{" "}
+                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  Leading Brands
+                </span>
+              </h2>
+              <p className="text-xl text-gray-400">
+                Join thousands of brands already growing with FirmCorner
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {trustedBrands.map((brand, index) => (
+                <motion.div
+                  key={brand}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.1, rotate: 2 }}
+                >
+                  <Card className="bg-white text-black hover:bg-gray-100 transition-all duration-300">
+                    <CardContent className="p-6 text-center">
+                      <div className="font-bold text-lg">{brand}</div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works */}
+        <section
+          id="how-it-works"
+          className="py-20"
+          aria-labelledby="how-it-works-heading"
+        >
+          <div className="container mx-auto px-4">
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2
+                id="how-it-works-heading"
+                className="text-4xl md:text-5xl font-bold mb-4"
+              >
+                How It{" "}
+                <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+                  Works
+                </span>
+              </h2>
+              <p className="text-xl text-gray-400">
+                Get started in just 4 simple steps
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {steps.map((step, index) => (
+                <motion.article
+                  key={step.number}
+                  className="text-center"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  <motion.div
+                    className="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6"
+                    whileHover={{ scale: 1.2, rotate: 360 }}
+                    transition={{ duration: 0.5 }}
+                    aria-label={`Step ${step.number}`}
+                  >
+                    {step.number}
+                  </motion.div>
+                  <h3 className="text-xl font-bold mb-4">{step.title}</h3>
+                  <p className="text-gray-400">{step.description}</p>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section
+          className="py-20 bg-gradient-to-r from-purple-900/50 to-pink-900/50"
+          aria-labelledby="cta-heading"
+        >
+          <div className="container mx-auto px-4 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2
+                id="cta-heading"
+                className="text-4xl md:text-5xl font-bold mb-6"
+              >
+                Ready to{" "}
+                <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+                  Get Started?
+                </span>
+              </h2>
+              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                Join thousands of brands already growing their audience and
+                building communities on FirmCorner
+              </p>
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-12 py-6 text-xl rounded-full"
+                asChild
+              >
+                <motion.a
+                  href="https://app.firmcorner.com"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Start your brand journey with FirmCorner"
+                >
+                  <Sparkles className="mr-2 h-6 w-6" aria-hidden="true" />
+                  Start Your Journey
+                </motion.a>
+              </Button>
+            </motion.div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="py-12 bg-black/50">
+        <div className="container mx-auto px-4 text-center">
+          <motion.p
+            className="text-gray-400"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            © 2025 FirmCorner. All rights reserved. | Connecting brands with
+            their perfect audience.
+          </motion.p>
+        </div>
+      </footer>
+    </div>
+  );
+}
