@@ -381,7 +381,7 @@ export default function AnimatedLanding() {
                 <motion.button
                   className="bg-white text-purple-700 hover:bg-gray-100 px-6 sm:px-8 py-3 text-base sm:text-lg rounded-lg transition-colors inline-flex items-center justify-center w-full sm:w-auto border border-purple-700"
                   onClick={() =>
-                    window.open("https://firm-mailer.netlify.app/", "_blank")
+                    window.open("https://mailer.firmcorner.com/", "_blank")
                   } // Placeholder URL for Firm Mailer
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
@@ -658,7 +658,7 @@ export default function AnimatedLanding() {
                 <motion.button
                   className="bg-purple-700 hover:bg-purple-800 text-white px-6 sm:px-8 py-3 text-base sm:text-lg rounded-lg transition-colors inline-flex items-center justify-center w-full sm:w-auto"
                   onClick={() =>
-                    window.open("https://firm-mailer.netlify.app/", "_blank")
+                    window.open("https://mailer.firmcorner.com/", "_blank")
                   } // Placeholder URL for Firm Mailer
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
@@ -961,7 +961,7 @@ export default function AnimatedLanding() {
                   FirmCorner App
                 </a>
                 <a
-                  href="https://firm-mailer.netlify.app/"
+                  href="https://mailer.firmcorner.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-purple-700 transition-colors block dark:text-gray-400"
