@@ -972,7 +972,7 @@ export default function AnimatedLanding() {
             </motion.div>
             <motion.div variants={staggerItem}>
               <h4 className="font-semibold text-gray-900 mb-4 dark:text-white">
-                Contact
+                Contacts
               </h4>
               <div className="space-y-2">
                 <a
