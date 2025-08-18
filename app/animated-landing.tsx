@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+
 import {
   Menu,
   X,
@@ -19,6 +20,10 @@ import {
   Rocket,
   Users,
   Zap,
+  FileText,
+  CreditCard,
+  Settings,
+  Download,
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
@@ -73,6 +78,58 @@ const features = [
     title: "Instagram-Style Feed",
     description:
       "Browse products in a beautiful, familiar feed format that makes discovery fun and engaging",
+  },
+];
+
+// Updated tools data with comprehensive information
+const toolsData = [
+  {
+    name: "FirmCorner App",
+    description:
+      "Connect with top brands and discover products by category with our Instagram-style platform",
+    icon: Building2,
+    url: "https://app.firmcorner.com",
+    color: "bg-blue-100",
+    iconColor: "text-blue-700",
+    buttonColor: "border-blue-600 text-blue-600 hover:bg-blue-50",
+    features: [
+      "Brand Profiles",
+      "Product Discovery",
+      "User Voting",
+      "Social Features",
+    ],
+  },
+  {
+    name: "Firm Mailer",
+    description:
+      "Send personalized bulk emails to multiple recipients effortlessly with custom templates",
+    icon: Mail,
+    url: "https://mailer.firmcorner.com/",
+    color: "bg-green-100",
+    iconColor: "text-green-700",
+    buttonColor: "border-green-600 text-green-600 hover:bg-green-50",
+    features: [
+      "Bulk Email Sending",
+      "Custom Templates",
+      "Multiple Providers",
+      "Easy Setup",
+    ],
+  },
+  {
+    name: "Firm Invoice",
+    description:
+      "Create professional white-labeled invoices with your company branding and multiple templates",
+    icon: FileText,
+    url: "https://invoice.firmcorner.com",
+    color: "bg-purple-100",
+    iconColor: "text-purple-700",
+    buttonColor: "border-purple-600 text-purple-600 hover:bg-purple-50",
+    features: [
+      "White-labeled Invoices",
+      "Company Branding",
+      "Multiple Templates",
+      "Professional Design",
+    ],
   },
 ];
 
@@ -161,14 +218,13 @@ export default function AnimatedLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [theme, setTheme] = useState("light");
-  const [showAnnouncement, setShowAnnouncement] = useState(true); // New state for announcement banner
+  const [showAnnouncement, setShowAnnouncement] = useState(true);
 
   // Refs for scroll animations
   const { ref: heroRef, isInView: heroInView } = useScrollAnimation();
   const { ref: featuresRef, isInView: featuresInView } = useScrollAnimation();
   const { ref: brandsRef, isInView: brandsInView } = useScrollAnimation();
-  const { ref: firmMailerRef, isInView: firmMailerInView } =
-    useScrollAnimation();
+  const { ref: toolsRef, isInView: toolsInView } = useScrollAnimation();
   const { ref: stepsRef, isInView: stepsInView } = useScrollAnimation();
   const { ref: contactRef, isInView: contactInView } = useScrollAnimation();
   const { ref: ctaRef, isInView: ctaInView } = useScrollAnimation();
@@ -186,10 +242,10 @@ export default function AnimatedLanding() {
   const navItems = [
     "Features",
     "Brands",
-    "Firm Mailer",
+    "Our Tools",
     "How It Works",
     "Contact",
-  ]; // Updated navigation
+  ];
 
   return (
     <div
@@ -230,6 +286,16 @@ export default function AnimatedLanding() {
                   {item}
                 </motion.a>
               ))}
+              <motion.a
+                href="#newlaunch"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * navItems.length, duration: 0.5 }}
+                whileHover={{ y: -2 }}
+              >
+                🚀 New Launch
+              </motion.a>
               <motion.button
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
                 className="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
@@ -284,6 +350,19 @@ export default function AnimatedLanding() {
                   {item}
                 </motion.a>
               ))}
+
+              {/* New Launch Button for Mobile */}
+              <motion.a
+                href="#newlaunch"
+                className="block w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-semibold py-3 px-4 rounded-lg text-center hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg"
+                onClick={() => setMobileMenuOpen(false)}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 * navItems.length }}
+              >
+                🚀 New Launch
+              </motion.a>
+
               <button
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
                 className="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
@@ -307,14 +386,14 @@ export default function AnimatedLanding() {
           exit={{ y: -100, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="fixed top-0 left-0 w-full bg-purple-600 text-white text-center py-3 z-40 flex items-center justify-center gap-4"
-          style={{ marginTop: scrollY > 50 ? "64px" : "72px" }} // Adjust margin based on header scroll
+          style={{ marginTop: scrollY > 50 ? "64px" : "72px" }}
         >
           <p className="text-sm md:text-base font-medium">
             ✨ New Product Launch:{" "}
-            <a href="#firm-mailer" className="underline hover:text-purple-100">
-              Firm Mailer
+            <a href="#our-tools" className="underline hover:text-purple-100">
+              Firm Invoice
             </a>{" "}
-            is here! Send bulk emails effortlessly.
+            is here! Create professional invoices with your branding.
           </p>
           <button
             onClick={() => setShowAnnouncement(false)}
@@ -327,8 +406,6 @@ export default function AnimatedLanding() {
       )}
 
       <main className={showAnnouncement ? "pt-20" : ""}>
-        {" "}
-        {/* Adjust main padding if banner is visible */}
         {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center pt-20 bg-gray-50 dark:bg-gray-800">
           <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
@@ -345,10 +422,9 @@ export default function AnimatedLanding() {
                 variants={fadeInUp}
                 transition={{ delay: 0.2 }}
               >
-                FirmCorner{" "}
-                <span className="text-purple-700">x Firm Mailer</span>
+                FirmCorner <span className="text-purple-700">Ecosystem</span>
                 <br />
-                Connect & Grow.
+                Connect, Create & Grow.
               </motion.h1>
 
               <motion.p
@@ -356,10 +432,9 @@ export default function AnimatedLanding() {
                 variants={fadeInUp}
                 transition={{ delay: 0.4 }}
               >
-                Connect with top brands, explore products by category, and vote
-                for your favorites in one powerful platform. Now, with **Firm
-                Mailer**, send personalized emails to multiple recipients
-                effortlessly.
+                Your all-in-one business toolkit. Connect with brands, send bulk
+                emails, create professional invoices, and build your community -
+                all under one powerful ecosystem.
               </motion.p>
               <motion.div
                 className="flex flex-col sm:flex-row gap-4"
@@ -367,27 +442,29 @@ export default function AnimatedLanding() {
                 transition={{ delay: 0.6 }}
               >
                 <motion.button
-                  className="bg-purple-700 hover:bg-purple-800 text-white px-6 sm:px-8 py-3 text-base sm:text-lg rounded-lg transition-colors inline-flex items-center justify-center w-full sm:w-auto"
+                  className="bg-purple-700 hover:bg-purple-800 text-white px-6 sm:px-8 py-3 text-base sm:text-lg rounded-lg transition-all duration-300 inline-flex items-center justify-center w-full sm:w-auto hover:scale-105"
                   onClick={() =>
                     window.open("https://app.firmcorner.com", "_blank")
                   }
-                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  Explore FirmCorner App
+                  Explore Firm Corner App
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </motion.button>
                 <motion.button
-                  className="bg-white text-purple-700 hover:bg-gray-100 px-6 sm:px-8 py-3 text-base sm:text-lg rounded-lg transition-colors inline-flex items-center justify-center w-full sm:w-auto border border-purple-700"
+                  className="bg-white text-purple-700 hover:bg-gray-100 px-6 sm:px-8 py-3 text-base sm:text-lg rounded-lg transition-all duration-300 inline-flex items-center justify-center w-full sm:w-auto border border-purple-700 hover:scale-105"
                   onClick={() =>
-                    window.open("https://mailer.firmcorner.com/", "_blank")
-                  } // Placeholder URL for Firm Mailer
-                  whileHover={{ scale: 1.05, y: -2 }}
+                    document
+                      .getElementById("our-tools")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  Discover Firm Mailer
+                  View All Tools
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </motion.button>
               </motion.div>
@@ -404,8 +481,12 @@ export default function AnimatedLanding() {
                     text: "Growing Fast",
                     color: "text-green-600",
                   },
-                  { icon: Users, text: "10K+ Brands", color: "text-blue-600" },
-                  { icon: Zap, text: "Real-time", color: "text-yellow-600" },
+                  { icon: Users, text: "10K+ Users", color: "text-blue-600" },
+                  {
+                    icon: Zap,
+                    text: "3 Tools & Counting",
+                    color: "text-yellow-600",
+                  },
                 ].map((item, index) => (
                   <motion.div
                     key={item.text}
@@ -439,7 +520,7 @@ export default function AnimatedLanding() {
                     key={brand.name}
                     variants={staggerItem}
                     whileHover={{ scale: 1.05, y: -5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800">
                       <CardContent className="flex flex-col items-center justify-center p-6 text-center space-y-3">
@@ -461,6 +542,7 @@ export default function AnimatedLanding() {
             </motion.div>
           </div>
         </section>
+
         {/* Features Section */}
         <section id="features" className="py-20 bg-white dark:bg-gray-900">
           <div className="container mx-auto px-4">
@@ -477,7 +559,7 @@ export default function AnimatedLanding() {
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto dark:text-gray-400">
                 Everything you need to build, grow, and showcase your brand in
-                one powerful platform
+                one powerful ecosystem
               </p>
             </motion.div>
             <motion.div
@@ -491,15 +573,15 @@ export default function AnimatedLanding() {
                 <motion.div
                   key={feature.title}
                   variants={staggerItem}
-                  whileHover={{ y: -10 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 h-full bg-white dark:bg-gray-800">
                     <CardContent className="p-8">
                       <motion.div
                         className="w-16 h-16 rounded-lg bg-purple-100 flex items-center justify-center mb-6"
-                        whileHover={{ rotate: 5, scale: 1.1 }}
-                        transition={{ type: "spring", stiffness: 300 }}
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.2 }}
                       >
                         <feature.icon className="h-8 w-8 text-purple-700" />
                       </motion.div>
@@ -516,6 +598,7 @@ export default function AnimatedLanding() {
             </motion.div>
           </div>
         </section>
+
         {/* Brands Showcase */}
         <section id="brands" className="py-20 bg-gray-50 dark:bg-gray-800">
           <div className="container mx-auto px-4">
@@ -547,7 +630,7 @@ export default function AnimatedLanding() {
                   key={brand}
                   variants={staggerItem}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-md transition-all duration-300 bg-white dark:bg-gray-800">
                     <CardContent className="p-6 text-center">
@@ -561,116 +644,344 @@ export default function AnimatedLanding() {
             </motion.div>
           </div>
         </section>
-        {/* Firm Mailer Section */}
-        <section id="firm-mailer" className="py-20 bg-white dark:bg-gray-900">
-          <div className="container mx-auto px-4">
+
+        {/* Recently Launched Section */}
+        <section
+          id="newlaunch"
+          className="py-20 bg-white-to-br from-purple-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 relative overflow-hidden"
+        >
+          {/* Background decoration */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-10 left-10 w-32 h-32 bg-purple-600 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-10 right-10 w-40 h-40 bg-indigo-600 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
             <motion.div
-              ref={firmMailerRef}
               className="text-center mb-16"
               variants={fadeInUp}
               initial="hidden"
-              animate={firmMailerInView ? "visible" : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-                Introducing <span className="text-purple-700">Firm Mailer</span>
-                : Your Bulk Email Solution
+              <motion.div
+                className="inline-flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <Rocket className="h-4 w-4" />
+                Recently Launched
+              </motion.div>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
+                Introducing{" "}
+                <span className="text-purple-700">Firm Invoice</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto dark:text-gray-400">
-                Send personalized emails to multiple recipients effortlessly.
-                Perfect for product launches, investor outreach, and more.
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto dark:text-gray-400">
+                Create stunning, professional invoices with your custom branding
+                in minutes. The newest addition to our growing ecosystem of
+                business tools.
               </p>
             </motion.div>
-            <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left side - Product showcase */}
               <motion.div
                 className="relative"
                 variants={slideInLeft}
                 initial="hidden"
-                animate={firmMailerInView ? "visible" : "hidden"}
-                transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+                whileInView="visible"
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
               >
-                <Image
-                  src="/firmmailer.png"
-                  alt="Firm Mailer Dashboard"
-                  width={600}
-                  height={400}
-                  className="rounded-xl shadow-lg object-cover w-full"
-                />
+                <motion.div
+                  className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-gray-700"
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center">
+                        <FileText className="h-6 w-6 text-purple-700" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                          Firm Invoice
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          Professional Invoice Generator
+                        </p>
+                      </div>
+                    </div>
+                    <motion.div
+                      className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium"
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      NEW
+                    </motion.div>
+                  </div>
+
+                  {/* Mock invoice preview */}
+                  <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <div className="w-16 h-4 bg-purple-200 rounded mb-2"></div>
+                        <div className="w-24 h-3 bg-gray-200 rounded"></div>
+                      </div>
+                      <div className="text-right">
+                        <div className="w-20 h-4 bg-gray-300 rounded mb-1 ml-auto"></div>
+                        <div className="w-16 h-3 bg-gray-200 rounded ml-auto"></div>
+                      </div>
+                    </div>
+                    <div className="border-t border-gray-200 pt-4">
+                      <div className="space-y-2">
+                        <div className="flex justify-between">
+                          <div className="w-32 h-3 bg-gray-200 rounded"></div>
+                          <div className="w-16 h-3 bg-gray-200 rounded"></div>
+                        </div>
+                        <div className="flex justify-between">
+                          <div className="w-28 h-3 bg-gray-200 rounded"></div>
+                          <div className="w-16 h-3 bg-gray-200 rounded"></div>
+                        </div>
+                      </div>
+                      <div className="border-t border-gray-200 mt-4 pt-2 flex justify-between">
+                        <div className="w-20 h-4 bg-purple-200 rounded"></div>
+                        <div className="w-20 h-4 bg-purple-300 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <motion.button
+                    className="w-full bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-lg transition-all duration-300 font-medium flex items-center justify-center gap-2 hover:scale-105"
+                    onClick={() =>
+                      window.open("https://invoice.firmcorner.com", "_blank")
+                    }
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <FileText className="h-4 w-4" />
+                    Try Firm Invoice Now
+                  </motion.button>
+                </motion.div>
+
+                {/* Floating elements */}
+                <motion.div
+                  className="absolute -top-6 -right-6 w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg"
+                  animate={{
+                    y: [0, -10, 0],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <Star className="h-6 w-6 text-white" />
+                </motion.div>
               </motion.div>
+
+              {/* Right side - Features and benefits */}
               <motion.div
                 className="space-y-8"
                 variants={slideInRight}
                 initial="hidden"
-                animate={firmMailerInView ? "visible" : "hidden"}
-                transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+                whileInView="visible"
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.5 }}
               >
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  Key Features:
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {[
-                    {
-                      icon: Mail,
-                      title: "Bulk Sending",
-                      description: "Send to multiple emails at once.",
-                    },
-                    {
-                      icon: Star,
-                      title: "Customizable Templates",
-                      description:
-                        "Use pre-designed templates or create your own.",
-                    },
-                    {
-                      icon: Building2,
-                      title: "Multiple Providers",
-                      description:
-                        "Supports Gmail, Outlook, Yahoo, and Custom SMTP.",
-                    },
-                    {
-                      icon: Smartphone,
-                      title: "App Password Guidance",
-                      description: "Easy setup with clear instructions.",
-                    },
-                  ].map((item, index) => (
-                    <motion.div
-                      key={item.title}
-                      variants={staggerItem}
-                      whileHover={{ y: -5 }}
-                    >
-                      <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 h-full bg-white dark:bg-gray-800">
-                        <CardContent className="p-6">
-                          <div className="flex items-center space-x-4 mb-4">
-                            <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
-                              <item.icon className="h-5 w-5 text-purple-700" />
-                            </div>
-                            <h4 className="text-lg font-bold text-gray-900 dark:text-white">
-                              {item.title}
-                            </h4>
-                          </div>
-                          <p className="text-gray-600 dark:text-gray-400">
-                            {item.description}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  ))}
+                <div className="space-y-6">
+                  <motion.div
+                    className="flex items-start gap-4"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 mt-1">
+                      <Building2 className="h-4 w-4 text-purple-700" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
+                        Custom Branding
+                      </h4>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Add your company logo, colors, and branding to create
+                        professional white-labeled invoices that reflect your
+                        business identity.
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    className="flex items-start gap-4"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
+                      <Settings className="h-4 w-4 text-green-700" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
+                        Multiple Templates
+                      </h4>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Choose from a variety of professionally designed
+                        templates that suit different business types and
+                        industries.
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    className="flex items-start gap-4"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
+                      <Download className="h-4 w-4 text-blue-700" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
+                        Instant Download
+                      </h4>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Generate and download your invoices instantly as PDF
+                        files, ready to send to your clients immediately.
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    className="flex items-start gap-4"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 mt-1">
+                      <CreditCard className="h-4 w-4 text-orange-700" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
+                        Easy Setup
+                      </h4>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        No complex setup required. Simply fill in your details,
+                        add line items, and generate professional invoices in
+                        minutes.
+                      </p>
+                    </div>
+                  </motion.div>
                 </div>
-                <motion.button
-                  className="bg-purple-700 hover:bg-purple-800 text-white px-6 sm:px-8 py-3 text-base sm:text-lg rounded-lg transition-colors inline-flex items-center justify-center w-full sm:w-auto"
-                  onClick={() =>
-                    window.open("https://mailer.firmcorner.com/", "_blank")
-                  } // Placeholder URL for Firm Mailer
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+
+                <motion.div
+                  className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  Learn More about Firm Mailer
-                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-                </motion.button>
+                  <div className="flex items-center gap-3 mb-4">
+                    <Zap className="h-5 w-5 text-yellow-500" />
+                    <span className="text-sm font-medium text-yellow-600 dark:text-yellow-400">
+                      Launch Special
+                    </span>
+                  </div>
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
+                    Free to Use
+                  </h4>
+                  <p className="text-gray-600 text-sm dark:text-gray-400">
+                    Celebrate our launch with completely free access to all Firm
+                    Invoice features. No hidden costs, no subscriptions
+                    required.
+                  </p>
+                </motion.div>
               </motion.div>
             </div>
           </div>
         </section>
+
+        {/* Our Tools Section */}
+        <section id="our-tools" className="py-20 bg-white dark:bg-gray-900">
+          <div className="container mx-auto px-4">
+            <motion.div
+              ref={toolsRef}
+              className="text-center mb-16"
+              variants={fadeInUp}
+              initial="hidden"
+              animate={toolsInView ? "visible" : "hidden"}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+                Our <span className="text-purple-700">Powerful Tools</span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto dark:text-gray-400">
+                Complete business solutions designed to help you grow, connect,
+                and succeed
+              </p>
+            </motion.div>
+            <motion.div
+              className="grid md:grid-cols-1 lg:grid-cols-3 gap-8"
+              variants={staggerContainer}
+              initial="hidden"
+              animate={toolsInView ? "visible" : "hidden"}
+              transition={{ delay: 0.3 }}
+            >
+              {toolsData.map((tool, index) => (
+                <motion.div
+                  key={tool.name}
+                  variants={staggerItem}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 h-full bg-white dark:bg-gray-800">
+                    <CardContent className="p-8 flex flex-col h-full">
+                      <motion.div
+                        className={`w-16 h-16 rounded-lg ${tool.color} flex items-center justify-center mb-6`}
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <tool.icon className={`h-8 w-8 ${tool.iconColor}`} />
+                      </motion.div>
+                      <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+                        {tool.name}
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed mb-6 dark:text-gray-400">
+                        {tool.description}
+                      </p>
+                      <div className="mb-6">
+                        <h4 className="font-semibold text-gray-900 mb-3 dark:text-white">
+                          Key Features:
+                        </h4>
+                        <ul className="space-y-2">
+                          {tool.features.map((feature, featureIndex) => (
+                            <li
+                              key={featureIndex}
+                              className="flex items-center text-sm text-gray-600 dark:text-gray-400"
+                            >
+                              <Star className="h-4 w-4 text-yellow-500 mr-2 flex-shrink-0" />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="mt-auto">
+                        <motion.button
+                          className={`w-full border-2 ${tool.buttonColor} px-6 py-3 rounded-lg transition-all duration-300 font-medium hover:scale-105`}
+                          onClick={() => window.open(tool.url, "_blank")}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          Launch {tool.name}
+                        </motion.button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
         {/* How It Works */}
         <section
           id="how-it-works"
@@ -689,7 +1000,7 @@ export default function AnimatedLanding() {
                 How It <span className="text-purple-700">Works</span>
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-400">
-                Get started in just 4 simple steps
+                Get started with our ecosystem in just 4 simple steps
               </p>
             </motion.div>
             <motion.div
@@ -704,13 +1015,13 @@ export default function AnimatedLanding() {
                   key={step.number}
                   className="text-center"
                   variants={staggerItem}
-                  whileHover={{ y: -10 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  whileHover={{ y: -10, scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <motion.div
                     className="w-16 h-16 bg-purple-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
                   >
                     {step.number}
                   </motion.div>
@@ -752,7 +1063,10 @@ export default function AnimatedLanding() {
                 animate={contactInView ? "visible" : "hidden"}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <motion.div whileHover={{ scale: 1.02, y: -5 }}>
+                <motion.div
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800">
                     <CardContent className="p-8">
                       <div className="flex items-center space-x-4">
@@ -774,7 +1088,10 @@ export default function AnimatedLanding() {
                     </CardContent>
                   </Card>
                 </motion.div>
-                <motion.div whileHover={{ scale: 1.02, y: -5 }}>
+                <motion.div
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800">
                     <CardContent className="p-8">
                       <div className="flex items-center space-x-4">
@@ -807,7 +1124,10 @@ export default function AnimatedLanding() {
                     Follow Us
                   </h3>
                   <div className="space-y-4">
-                    <motion.div whileHover={{ scale: 1.02, y: -5 }}>
+                    <motion.div
+                      whileHover={{ scale: 1.02, y: -5 }}
+                      transition={{ duration: 0.2 }}
+                    >
                       <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800">
                         <CardContent className="p-6">
                           <div className="flex items-center space-x-4">
@@ -843,7 +1163,10 @@ export default function AnimatedLanding() {
                         </CardContent>
                       </Card>
                     </motion.div>
-                    <motion.div whileHover={{ scale: 1.02, y: -5 }}>
+                    <motion.div
+                      whileHover={{ scale: 1.02, y: -5 }}
+                      transition={{ duration: 0.2 }}
+                    >
                       <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800">
                         <CardContent className="p-6">
                           <div className="flex items-center space-x-4">
@@ -912,13 +1235,13 @@ export default function AnimatedLanding() {
             </motion.p>
             <motion.div variants={fadeInUp} transition={{ delay: 0.6 }}>
               <motion.button
-                className="bg-white text-purple-700 hover:bg-gray-100 px-12 py-4 text-xl font-semibold rounded-lg inline-flex items-center"
+                className="bg-white text-purple-700 hover:bg-gray-100 px-12 py-4 text-xl font-semibold rounded-lg inline-flex items-center transition-all duration-300 hover:scale-105"
                 onClick={() =>
                   window.open("https://app.firmcorner.com", "_blank")
                 }
                 whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                transition={{ duration: 0.2 }}
               >
                 Start Your Journey
                 <ArrowRight className="ml-2 h-6 w-6" />
@@ -992,9 +1315,9 @@ export default function AnimatedLanding() {
                   href="https://www.instagram.com/firmcorner?igsh=MTgxZmpwanQybjdvZQ=="
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors dark:bg-gray-700"
+                  className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-purple-100 transition-all duration-300 hover:scale-110"
                   whileHover={{ scale: 1.1, y: -2 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Image src={insta || "/placeholder.svg"} alt="instagram" />
                 </motion.a>
@@ -1002,9 +1325,9 @@ export default function AnimatedLanding() {
                   href="https://www.linkedin.com/company/firm-corner/about"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors dark:bg-gray-700"
+                  className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-purple-100 transition-all duration-300 hover:scale-110"
                   whileHover={{ scale: 1.1, y: -2 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Image src={Linkedin || "/placeholder.svg"} alt="Linkedin" />
                 </motion.a>
