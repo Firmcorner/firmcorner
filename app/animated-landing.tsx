@@ -442,27 +442,27 @@ export default function AnimatedLanding() {
                 transition={{ delay: 0.6 }}
               >
                 <motion.button
-                  className="bg-purple-700 hover:bg-purple-800 text-white px-6 sm:px-8 py-3 text-base sm:text-lg rounded-lg transition-colors inline-flex items-center justify-center w-full sm:w-auto"
+                  className="bg-purple-700 hover:bg-purple-800 text-white px-6 sm:px-8 py-3 text-base sm:text-lg rounded-lg transition-all duration-300 inline-flex items-center justify-center w-full sm:w-auto hover:scale-105"
                   onClick={() =>
                     window.open("https://app.firmcorner.com", "_blank")
                   }
-                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ duration: 0.2 }}
                 >
                   Explore Firm Corner App
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </motion.button>
                 <motion.button
-                  className="bg-white text-purple-700 hover:bg-gray-100 px-6 sm:px-8 py-3 text-base sm:text-lg rounded-lg transition-colors inline-flex items-center justify-center w-full sm:w-auto border border-purple-700"
+                  className="bg-white text-purple-700 hover:bg-gray-100 px-6 sm:px-8 py-3 text-base sm:text-lg rounded-lg transition-all duration-300 inline-flex items-center justify-center w-full sm:w-auto border border-purple-700 hover:scale-105"
                   onClick={() =>
                     document
                       .getElementById("our-tools")
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
-                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ duration: 0.2 }}
                 >
                   View All Tools
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
@@ -520,7 +520,7 @@ export default function AnimatedLanding() {
                     key={brand.name}
                     variants={staggerItem}
                     whileHover={{ scale: 1.05, y: -5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800">
                       <CardContent className="flex flex-col items-center justify-center p-6 text-center space-y-3">
@@ -573,15 +573,15 @@ export default function AnimatedLanding() {
                 <motion.div
                   key={feature.title}
                   variants={staggerItem}
-                  whileHover={{ y: -10 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 h-full bg-white dark:bg-gray-800">
                     <CardContent className="p-8">
                       <motion.div
                         className="w-16 h-16 rounded-lg bg-purple-100 flex items-center justify-center mb-6"
-                        whileHover={{ rotate: 5, scale: 1.1 }}
-                        transition={{ type: "spring", stiffness: 300 }}
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.2 }}
                       >
                         <feature.icon className="h-8 w-8 text-purple-700" />
                       </motion.div>
@@ -630,7 +630,7 @@ export default function AnimatedLanding() {
                   key={brand}
                   variants={staggerItem}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-md transition-all duration-300 bg-white dark:bg-gray-800">
                     <CardContent className="p-6 text-center">
@@ -698,8 +698,8 @@ export default function AnimatedLanding() {
               >
                 <motion.div
                   className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-gray-700"
-                  whileHover={{ y: -10 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
@@ -755,12 +755,13 @@ export default function AnimatedLanding() {
                   </div>
 
                   <motion.button
-                    className="w-full bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-lg transition-colors font-medium flex items-center justify-center gap-2"
+                    className="w-full bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-lg transition-all duration-300 font-medium flex items-center justify-center gap-2 hover:scale-105"
                     onClick={() =>
                       window.open("https://invoice.firmcorner.com", "_blank")
                     }
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <FileText className="h-4 w-4" />
                     Try Firm Invoice Now
@@ -772,10 +773,9 @@ export default function AnimatedLanding() {
                   className="absolute -top-6 -right-6 w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg"
                   animate={{
                     y: [0, -10, 0],
-                    rotate: [0, 5, -5, 0],
                   }}
                   transition={{
-                    duration: 4,
+                    duration: 3,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
@@ -797,7 +797,7 @@ export default function AnimatedLanding() {
                   <motion.div
                     className="flex items-start gap-4"
                     whileHover={{ x: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 mt-1">
                       <Building2 className="h-4 w-4 text-purple-700" />
@@ -817,7 +817,7 @@ export default function AnimatedLanding() {
                   <motion.div
                     className="flex items-start gap-4"
                     whileHover={{ x: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
                       <Settings className="h-4 w-4 text-green-700" />
@@ -837,7 +837,7 @@ export default function AnimatedLanding() {
                   <motion.div
                     className="flex items-start gap-4"
                     whileHover={{ x: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
                       <Download className="h-4 w-4 text-blue-700" />
@@ -856,7 +856,7 @@ export default function AnimatedLanding() {
                   <motion.div
                     className="flex items-start gap-4"
                     whileHover={{ x: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 mt-1">
                       <CreditCard className="h-4 w-4 text-orange-700" />
@@ -877,7 +877,7 @@ export default function AnimatedLanding() {
                 <motion.div
                   className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg"
                   whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <Zap className="h-5 w-5 text-yellow-500" />
@@ -929,15 +929,15 @@ export default function AnimatedLanding() {
                 <motion.div
                   key={tool.name}
                   variants={staggerItem}
-                  whileHover={{ y: -10 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 h-full bg-white dark:bg-gray-800">
                     <CardContent className="p-8 flex flex-col h-full">
                       <motion.div
                         className={`w-16 h-16 rounded-lg ${tool.color} flex items-center justify-center mb-6`}
-                        whileHover={{ rotate: 5, scale: 1.1 }}
-                        transition={{ type: "spring", stiffness: 300 }}
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.2 }}
                       >
                         <tool.icon className={`h-8 w-8 ${tool.iconColor}`} />
                       </motion.div>
@@ -965,10 +965,11 @@ export default function AnimatedLanding() {
                       </div>
                       <div className="mt-auto">
                         <motion.button
-                          className={`w-full border-2 ${tool.buttonColor} px-6 py-3 rounded-lg transition-colors font-medium`}
+                          className={`w-full border-2 ${tool.buttonColor} px-6 py-3 rounded-lg transition-all duration-300 font-medium hover:scale-105`}
                           onClick={() => window.open(tool.url, "_blank")}
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
+                          transition={{ duration: 0.2 }}
                         >
                           Launch {tool.name}
                         </motion.button>
@@ -1014,13 +1015,13 @@ export default function AnimatedLanding() {
                   key={step.number}
                   className="text-center"
                   variants={staggerItem}
-                  whileHover={{ y: -10 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  whileHover={{ y: -10, scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <motion.div
                     className="w-16 h-16 bg-purple-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
                   >
                     {step.number}
                   </motion.div>
@@ -1062,7 +1063,10 @@ export default function AnimatedLanding() {
                 animate={contactInView ? "visible" : "hidden"}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <motion.div whileHover={{ scale: 1.02, y: -5 }}>
+                <motion.div
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800">
                     <CardContent className="p-8">
                       <div className="flex items-center space-x-4">
@@ -1084,7 +1088,10 @@ export default function AnimatedLanding() {
                     </CardContent>
                   </Card>
                 </motion.div>
-                <motion.div whileHover={{ scale: 1.02, y: -5 }}>
+                <motion.div
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800">
                     <CardContent className="p-8">
                       <div className="flex items-center space-x-4">
@@ -1117,7 +1124,10 @@ export default function AnimatedLanding() {
                     Follow Us
                   </h3>
                   <div className="space-y-4">
-                    <motion.div whileHover={{ scale: 1.02, y: -5 }}>
+                    <motion.div
+                      whileHover={{ scale: 1.02, y: -5 }}
+                      transition={{ duration: 0.2 }}
+                    >
                       <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800">
                         <CardContent className="p-6">
                           <div className="flex items-center space-x-4">
@@ -1153,7 +1163,10 @@ export default function AnimatedLanding() {
                         </CardContent>
                       </Card>
                     </motion.div>
-                    <motion.div whileHover={{ scale: 1.02, y: -5 }}>
+                    <motion.div
+                      whileHover={{ scale: 1.02, y: -5 }}
+                      transition={{ duration: 0.2 }}
+                    >
                       <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800">
                         <CardContent className="p-6">
                           <div className="flex items-center space-x-4">
@@ -1222,13 +1235,13 @@ export default function AnimatedLanding() {
             </motion.p>
             <motion.div variants={fadeInUp} transition={{ delay: 0.6 }}>
               <motion.button
-                className="bg-white text-purple-700 hover:bg-gray-100 px-12 py-4 text-xl font-semibold rounded-lg inline-flex items-center"
+                className="bg-white text-purple-700 hover:bg-gray-100 px-12 py-4 text-xl font-semibold rounded-lg inline-flex items-center transition-all duration-300 hover:scale-105"
                 onClick={() =>
                   window.open("https://app.firmcorner.com", "_blank")
                 }
                 whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                transition={{ duration: 0.2 }}
               >
                 Start Your Journey
                 <ArrowRight className="ml-2 h-6 w-6" />
@@ -1302,9 +1315,9 @@ export default function AnimatedLanding() {
                   href="https://www.instagram.com/firmcorner?igsh=MTgxZmpwanQybjdvZQ=="
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors dark:bg-gray-700"
+                  className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-purple-100 transition-all duration-300 hover:scale-110"
                   whileHover={{ scale: 1.1, y: -2 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Image src={insta || "/placeholder.svg"} alt="instagram" />
                 </motion.a>
@@ -1312,9 +1325,9 @@ export default function AnimatedLanding() {
                   href="https://www.linkedin.com/company/firm-corner/about"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors dark:bg-gray-700"
+                  className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-purple-100 transition-all duration-300 hover:scale-110"
                   whileHover={{ scale: 1.1, y: -2 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Image src={Linkedin || "/placeholder.svg"} alt="Linkedin" />
                 </motion.a>
