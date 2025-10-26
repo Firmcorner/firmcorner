@@ -21,9 +21,14 @@ import {
   Users,
   Zap,
   FileText,
-  CreditCard,
-  Settings,
   Download,
+  FileSpreadsheet,
+  Filter,
+  Edit3,
+  Upload,
+  Grid3x3,
+  Sparkles,
+  Check,
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
@@ -85,13 +90,17 @@ const features = [
 const toolsData = [
   {
     name: "FirmCorner App",
+    shortDesc: "Connect & Discover",
     description:
       "Connect with top brands and discover products by category with our Instagram-style platform",
     icon: Building2,
     url: "https://app.firmcorner.com",
-    color: "bg-blue-100",
-    iconColor: "text-blue-700",
-    buttonColor: "border-blue-600 text-blue-600 hover:bg-blue-50",
+    gradient: "from-blue-500 to-blue-700",
+    bgColor: "bg-blue-50 dark:bg-blue-950/30",
+    iconBg: "bg-blue-100 dark:bg-blue-900",
+    iconColor: "text-blue-700 dark:text-blue-300",
+    buttonColor: "bg-blue-600 hover:bg-blue-700",
+    accentIcon: Users,
     features: [
       "Brand Profiles",
       "Product Discovery",
@@ -101,13 +110,17 @@ const toolsData = [
   },
   {
     name: "Firm Mailer",
+    shortDesc: "Email Marketing",
     description:
       "Send personalized bulk emails to multiple recipients effortlessly with custom templates",
     icon: Mail,
     url: "https://mailer.firmcorner.com/",
-    color: "bg-green-100",
-    iconColor: "text-green-700",
-    buttonColor: "border-green-600 text-green-600 hover:bg-green-50",
+    gradient: "from-green-500 to-emerald-700",
+    bgColor: "bg-green-50 dark:bg-green-950/30",
+    iconBg: "bg-green-100 dark:bg-green-900",
+    iconColor: "text-green-700 dark:text-green-300",
+    buttonColor: "bg-green-600 hover:bg-green-700",
+    accentIcon: Zap,
     features: [
       "Bulk Email Sending",
       "Custom Templates",
@@ -117,18 +130,43 @@ const toolsData = [
   },
   {
     name: "Firm Invoice",
+    shortDesc: "Professional Invoicing",
     description:
       "Create professional white-labeled invoices with your company branding and multiple templates",
     icon: FileText,
     url: "https://invoice.firmcorner.com",
-    color: "bg-purple-100",
-    iconColor: "text-purple-700",
-    buttonColor: "border-purple-600 text-purple-600 hover:bg-purple-50",
+    gradient: "from-purple-500 to-purple-700",
+    bgColor: "bg-purple-50 dark:bg-purple-950/30",
+    iconBg: "bg-purple-100 dark:bg-purple-900",
+    iconColor: "text-purple-700 dark:text-purple-300",
+    buttonColor: "bg-purple-600 hover:bg-purple-700",
+    accentIcon: TrendingUp,
     features: [
       "White-labeled Invoices",
       "Company Branding",
       "Multiple Templates",
       "Professional Design",
+    ],
+  },
+  {
+    name: "Firm Viewer",
+    shortDesc: "Data Management",
+    description:
+      "Powerful CSV/Excel file manager with editing, filtering, and export capabilities for seamless data handling",
+    icon: FileSpreadsheet,
+    url: "https://viewer.firmcorner.com",
+    gradient: "from-emerald-500 to-green-700",
+    bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
+    iconBg: "bg-emerald-100 dark:bg-emerald-900",
+    iconColor: "text-emerald-700 dark:text-emerald-300",
+    buttonColor: "bg-emerald-600 hover:bg-emerald-700",
+    accentIcon: Sparkles,
+    isNew: true,
+    features: [
+      "CSV/Excel Support",
+      "Data Editing",
+      "Advanced Filtering",
+      "Instant Export",
     ],
   },
 ];
@@ -219,7 +257,7 @@ export default function AnimatedLanding() {
   const [scrollY, setScrollY] = useState(0);
   const [theme, setTheme] = useState("light");
   const [showAnnouncement, setShowAnnouncement] = useState(true);
-
+  const [hoveredTool, setHoveredTool] = useState<any>(null);
   // Refs for scroll animations
   const { ref: heroRef, isInView: heroInView } = useScrollAnimation();
   const { ref: featuresRef, isInView: featuresInView } = useScrollAnimation();
@@ -390,10 +428,10 @@ export default function AnimatedLanding() {
         >
           <p className="text-sm md:text-base font-medium">
             ✨ New Product Launch:{" "}
-            <a href="#our-tools" className="underline hover:text-purple-100">
-              Firm Invoice
+            <a href="#newlaunch" className="underline hover:text-purple-100">
+              Firm Viewer
             </a>{" "}
-            is here! Create professional invoices with your branding.
+            is here! Powerful Edit CSVs and Excel files in seconds.
           </p>
           <button
             onClick={() => setShowAnnouncement(false)}
@@ -656,7 +694,263 @@ export default function AnimatedLanding() {
             <div className="absolute bottom-10 right-10 w-40 h-40 bg-indigo-600 rounded-full blur-3xl"></div>
           </div>
 
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-20 px-4">
+            <div className="max-w-7xl mx-auto">
+              {/* Header */}
+              <motion.div
+                className="text-center mb-16"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <motion.div
+                  className="inline-flex items-center gap-2 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 px-4 py-2 rounded-full text-sm font-medium mb-6"
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <Sparkles className="h-4 w-4" />
+                  Recently Launched
+                </motion.div>
+
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+                  Introducing{" "}
+                  <span className="text-purple-600 dark:text-purple-400">
+                    Firm Viewer
+                  </span>
+                </h1>
+
+                <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                  Manage and edit your CSV/Excel files with powerful filtering
+                  and data visualization.
+                  <br />
+                  The newest addition to our growing ecosystem of business
+                  tools.
+                </p>
+              </motion.div>
+
+              {/* Main Content Grid */}
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                {/* Left side - Product card */}
+                <motion.div
+                  className="relative"
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  <motion.div
+                    className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700"
+                    whileHover={{ y: -5 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Card Header */}
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                          <FileSpreadsheet className="h-6 w-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                            Firm Viewer
+                          </h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                            Professional Data Manager
+                          </p>
+                        </div>
+                      </div>
+                      <span className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 px-3 py-1 rounded-full text-xs font-medium">
+                        NEW
+                      </span>
+                    </div>
+
+                    {/* Mock spreadsheet preview */}
+                    <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-xl p-4 mb-6 border border-gray-200 dark:border-gray-600">
+                      {/* Toolbar */}
+                      <div className="flex items-center gap-2 mb-3 pb-3 border-b border-gray-300 dark:border-gray-600">
+                        <div className="w-6 h-6 bg-green-500 rounded flex items-center justify-center">
+                          <Grid3x3 className="h-3 w-3 text-white" />
+                        </div>
+                        <div className="flex-1 bg-white dark:bg-gray-700 rounded px-2 py-1">
+                          <div className="w-24 h-2 bg-gray-300 dark:bg-gray-600 rounded"></div>
+                        </div>
+                        <div className="flex gap-1">
+                          <div className="w-5 h-5 bg-blue-400 rounded"></div>
+                          <div className="w-5 h-5 bg-green-400 rounded"></div>
+                          <div className="w-5 h-5 bg-orange-400 rounded"></div>
+                        </div>
+                      </div>
+
+                      {/* Table header with Excel green accent */}
+                      <div className="grid grid-cols-4 gap-2 mb-2">
+                        <div className="w-full h-3 bg-green-500 rounded"></div>
+                        <div className="w-full h-3 bg-green-500 rounded"></div>
+                        <div className="w-full h-3 bg-green-500 rounded"></div>
+                        <div className="w-full h-3 bg-green-500 rounded"></div>
+                      </div>
+
+                      {/* Table rows */}
+                      <div className="space-y-2">
+                        {[1, 2, 3, 4, 5].map((row) => (
+                          <div key={row} className="grid grid-cols-4 gap-2">
+                            <div className="w-full h-2.5 bg-white dark:bg-gray-700 rounded shadow-sm"></div>
+                            <div className="w-full h-2.5 bg-white dark:bg-gray-700 rounded shadow-sm"></div>
+                            <div className="w-full h-2.5 bg-white dark:bg-gray-700 rounded shadow-sm"></div>
+                            <div className="w-full h-2.5 bg-white dark:bg-gray-700 rounded shadow-sm"></div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* CTA Button */}
+                    <motion.button
+                      className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-6 py-3.5 rounded-lg transition-all duration-300 font-medium flex items-center justify-center gap-2 shadow-lg"
+                      onClick={() =>
+                        window.open("https://viewer.firmcorner.com", "_blank")
+                      }
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <FileSpreadsheet className="h-4 w-4" />
+                      Try Firm Viewer Now
+                    </motion.button>
+                  </motion.div>
+
+                  {/* Floating badge */}
+                  <motion.div
+                    className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-xl"
+                    animate={{
+                      y: [0, -8, 0],
+                      rotate: [0, 5, 0, -5, 0],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <Sparkles className="h-7 w-7 text-white" />
+                  </motion.div>
+                </motion.div>
+
+                {/* Right side - Features */}
+                <motion.div
+                  className="space-y-6"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                  {/* Feature 1 */}
+                  <motion.div
+                    className="flex items-start gap-4"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900 flex items-center justify-center flex-shrink-0">
+                      <Upload className="h-5 w-5 text-purple-700 dark:text-purple-300" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
+                        Easy File Upload
+                      </h4>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Upload CSV and Excel files instantly with drag-and-drop
+                        support. Compatible with XLSX, XLS, and CSV formats.
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  {/* Feature 2 */}
+                  <motion.div
+                    className="flex items-start gap-4"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900 flex items-center justify-center flex-shrink-0">
+                      <Edit3 className="h-5 w-5 text-green-700 dark:text-green-300" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
+                        Full Data Editing
+                      </h4>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Edit cells directly in your browser. Update, modify, and
+                        delete rows with an intuitive spreadsheet interface.
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  {/* Feature 3 */}
+                  <motion.div
+                    className="flex items-start gap-4"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0">
+                      <Filter className="h-5 w-5 text-blue-700 dark:text-blue-300" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
+                        Advanced Filtering
+                      </h4>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Apply powerful filters to find exactly what you need.
+                        Sort, search, and filter by any column efficiently.
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  {/* Feature 4 */}
+                  <motion.div
+                    className="flex items-start gap-4"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-900 flex items-center justify-center flex-shrink-0">
+                      <Download className="h-5 w-5 text-orange-700 dark:text-orange-300" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
+                        Instant Export
+                      </h4>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Download your edited data instantly as CSV or Excel. All
+                        your changes are preserved perfectly.
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  {/* Launch Special Card */}
+                  <motion.div
+                    className="bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-xl p-6 border border-yellow-200 dark:border-yellow-800"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <Zap className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
+                      <span className="text-sm font-semibold text-yellow-700 dark:text-yellow-400">
+                        Launch Special
+                      </span>
+                    </div>
+                    <h4 className="text-lg font-bold text-gray-900 mb-2 dark:text-white">
+                      Free to Use
+                    </h4>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">
+                      Celebrate our launch with completely free access to all
+                      Firm Viewer features. No hidden costs, no subscriptions
+                      required.
+                    </p>
+                  </motion.div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Our Tools Section */}
+        <section
+          id="our-tools"
+          className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"
+        >
+          <div className="container mx-auto px-4">
             <motion.div
               className="text-center mb-16"
               variants={fadeInUp}
@@ -666,251 +960,15 @@ export default function AnimatedLanding() {
               transition={{ duration: 0.6 }}
             >
               <motion.div
-                className="inline-flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-2 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 px-4 py-2 rounded-full text-sm font-medium mb-6"
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
               >
-                <Rocket className="h-4 w-4" />
-                Recently Launched
-              </motion.div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
-                Introducing{" "}
-                <span className="text-purple-700">Firm Invoice</span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto dark:text-gray-400">
-                Create stunning, professional invoices with your custom branding
-                in minutes. The newest addition to our growing ecosystem of
-                business tools.
-              </p>
-            </motion.div>
-
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Left side - Product showcase */}
-              <motion.div
-                className="relative"
-                variants={slideInLeft}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              >
-                <motion.div
-                  className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-gray-700"
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center">
-                        <FileText className="h-6 w-6 text-purple-700" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                          Firm Invoice
-                        </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          Professional Invoice Generator
-                        </p>
-                      </div>
-                    </div>
-                    <motion.div
-                      className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium"
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      NEW
-                    </motion.div>
-                  </div>
-
-                  {/* Mock invoice preview */}
-                  <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <div className="w-16 h-4 bg-purple-200 rounded mb-2"></div>
-                        <div className="w-24 h-3 bg-gray-200 rounded"></div>
-                      </div>
-                      <div className="text-right">
-                        <div className="w-20 h-4 bg-gray-300 rounded mb-1 ml-auto"></div>
-                        <div className="w-16 h-3 bg-gray-200 rounded ml-auto"></div>
-                      </div>
-                    </div>
-                    <div className="border-t border-gray-200 pt-4">
-                      <div className="space-y-2">
-                        <div className="flex justify-between">
-                          <div className="w-32 h-3 bg-gray-200 rounded"></div>
-                          <div className="w-16 h-3 bg-gray-200 rounded"></div>
-                        </div>
-                        <div className="flex justify-between">
-                          <div className="w-28 h-3 bg-gray-200 rounded"></div>
-                          <div className="w-16 h-3 bg-gray-200 rounded"></div>
-                        </div>
-                      </div>
-                      <div className="border-t border-gray-200 mt-4 pt-2 flex justify-between">
-                        <div className="w-20 h-4 bg-purple-200 rounded"></div>
-                        <div className="w-20 h-4 bg-purple-300 rounded"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <motion.button
-                    className="w-full bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-lg transition-all duration-300 font-medium flex items-center justify-center gap-2 hover:scale-105"
-                    onClick={() =>
-                      window.open("https://invoice.firmcorner.com", "_blank")
-                    }
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <FileText className="h-4 w-4" />
-                    Try Firm Invoice Now
-                  </motion.button>
-                </motion.div>
-
-                {/* Floating elements */}
-                <motion.div
-                  className="absolute -top-6 -right-6 w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg"
-                  animate={{
-                    y: [0, -10, 0],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Star className="h-6 w-6 text-white" />
-                </motion.div>
+                <Sparkles className="h-4 w-4" />
+                Complete Business Suite
               </motion.div>
 
-              {/* Right side - Features and benefits */}
-              <motion.div
-                className="space-y-8"
-                variants={slideInRight}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-              >
-                <div className="space-y-6">
-                  <motion.div
-                    className="flex items-start gap-4"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Building2 className="h-4 w-4 text-purple-700" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
-                        Custom Branding
-                      </h4>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Add your company logo, colors, and branding to create
-                        professional white-labeled invoices that reflect your
-                        business identity.
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    className="flex items-start gap-4"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Settings className="h-4 w-4 text-green-700" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
-                        Multiple Templates
-                      </h4>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Choose from a variety of professionally designed
-                        templates that suit different business types and
-                        industries.
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    className="flex items-start gap-4"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Download className="h-4 w-4 text-blue-700" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
-                        Instant Download
-                      </h4>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Generate and download your invoices instantly as PDF
-                        files, ready to send to your clients immediately.
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    className="flex items-start gap-4"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CreditCard className="h-4 w-4 text-orange-700" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
-                        Easy Setup
-                      </h4>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        No complex setup required. Simply fill in your details,
-                        add line items, and generate professional invoices in
-                        minutes.
-                      </p>
-                    </div>
-                  </motion.div>
-                </div>
-
-                <motion.div
-                  className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <Zap className="h-5 w-5 text-yellow-500" />
-                    <span className="text-sm font-medium text-yellow-600 dark:text-yellow-400">
-                      Launch Special
-                    </span>
-                  </div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
-                    Free to Use
-                  </h4>
-                  <p className="text-gray-600 text-sm dark:text-gray-400">
-                    Celebrate our launch with completely free access to all Firm
-                    Invoice features. No hidden costs, no subscriptions
-                    required.
-                  </p>
-                </motion.div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Our Tools Section */}
-        <section id="our-tools" className="py-20 bg-white dark:bg-gray-900">
-          <div className="container mx-auto px-4">
-            <motion.div
-              ref={toolsRef}
-              className="text-center mb-16"
-              variants={fadeInUp}
-              initial="hidden"
-              animate={toolsInView ? "visible" : "hidden"}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
                 Our <span className="text-purple-700">Powerful Tools</span>
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto dark:text-gray-400">
@@ -918,66 +976,159 @@ export default function AnimatedLanding() {
                 and succeed
               </p>
             </motion.div>
+
             <motion.div
-              className="grid md:grid-cols-1 lg:grid-cols-3 gap-8"
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
               variants={staggerContainer}
               initial="hidden"
-              animate={toolsInView ? "visible" : "hidden"}
-              transition={{ delay: 0.3 }}
+              whileInView="visible"
+              viewport={{ once: true }}
             >
               {toolsData.map((tool, index) => (
                 <motion.div
                   key={tool.name}
                   variants={staggerItem}
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
+                  onHoverStart={() => setHoveredTool(index)}
+                  onHoverEnd={() => setHoveredTool(null)}
+                  whileHover={{ y: -8 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 h-full bg-white dark:bg-gray-800">
-                    <CardContent className="p-8 flex flex-col h-full">
+                  <div
+                    className={`relative h-full rounded-2xl ${
+                      tool.bgColor
+                    } border-2 border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 ${
+                      hoveredTool === index
+                        ? "shadow-2xl border-transparent"
+                        : "shadow-lg"
+                    }`}
+                  >
+                    {/* Gradient overlay on hover */}
+                    <motion.div
+                      className={`absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-0 transition-opacity duration-300`}
+                      animate={{ opacity: hoveredTool === index ? 0.05 : 0 }}
+                    />
+
+                    {/* New badge */}
+                    {tool.isNew && (
                       <motion.div
-                        className={`w-16 h-16 rounded-lg ${tool.color} flex items-center justify-center mb-6`}
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ duration: 0.2 }}
+                        className="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+                        animate={{
+                          scale: [1, 1.1, 1],
+                          rotate: [0, 5, -5, 0],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
                       >
-                        <tool.icon className={`h-8 w-8 ${tool.iconColor}`} />
+                        NEW
                       </motion.div>
-                      <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                        {tool.name}
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed mb-6 dark:text-gray-400">
+                    )}
+
+                    <div className="relative p-6 flex flex-col h-full">
+                      {/* Icon with gradient background */}
+                      <motion.div
+                        className={`relative w-16 h-16 rounded-xl bg-gradient-to-br ${tool.gradient} flex items-center justify-center mb-4 shadow-lg`}
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <tool.icon className="h-8 w-8 text-white" />
+
+                        {/* Accent icon */}
+                        <motion.div
+                          className="absolute -top-2 -right-2 w-7 h-7 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-md"
+                          animate={{
+                            scale: hoveredTool === index ? [1, 1.2, 1] : 1,
+                          }}
+                          transition={{
+                            duration: 0.5,
+                            repeat: hoveredTool === index ? Infinity : 0,
+                          }}
+                        >
+                          <tool.accentIcon
+                            className={`h-4 w-4 ${tool.iconColor}`}
+                          />
+                        </motion.div>
+                      </motion.div>
+
+                      {/* Tool name and short description */}
+                      <div className="mb-4">
+                        <h3 className="text-xl font-bold mb-1 text-gray-900 dark:text-white">
+                          {tool.name}
+                        </h3>
+                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                          {tool.shortDesc}
+                        </p>
+                      </div>
+
+                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4 flex-grow">
                         {tool.description}
                       </p>
-                      <div className="mb-6">
-                        <h4 className="font-semibold text-gray-900 mb-3 dark:text-white">
-                          Key Features:
-                        </h4>
+
+                      {/* Features list */}
+                      <div className="mb-5">
                         <ul className="space-y-2">
                           {tool.features.map((feature, featureIndex) => (
-                            <li
+                            <motion.li
                               key={featureIndex}
-                              className="flex items-center text-sm text-gray-600 dark:text-gray-400"
+                              className="flex items-center text-sm text-gray-700 dark:text-gray-300"
+                              initial={{ opacity: 0, x: -10 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: featureIndex * 0.1 }}
                             >
-                              <Star className="h-4 w-4 text-yellow-500 mr-2 flex-shrink-0" />
+                              <Star className="h-3.5 w-3.5 text-yellow-500 mr-2 flex-shrink-0 fill-yellow-500" />
                               {feature}
-                            </li>
+                            </motion.li>
                           ))}
                         </ul>
                       </div>
-                      <div className="mt-auto">
-                        <motion.button
-                          className={`w-full border-2 ${tool.buttonColor} px-6 py-3 rounded-lg transition-all duration-300 font-medium hover:scale-105`}
-                          onClick={() => window.open(tool.url, "_blank")}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          transition={{ duration: 0.2 }}
+
+                      {/* CTA Button */}
+                      <motion.button
+                        className={`w-full ${tool.buttonColor} text-white px-6 py-3 rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl`}
+                        onClick={() => window.open(tool.url, "_blank")}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                      >
+                        Launch {tool.name.split(" ")[1]}
+                        <motion.div
+                          animate={{ x: hoveredTool === index ? 3 : 0 }}
+                          transition={{ duration: 0.3 }}
                         >
-                          Launch {tool.name}
-                        </motion.button>
-                      </div>
-                    </CardContent>
-                  </Card>
+                          <ArrowRight className="h-4 w-4" />
+                        </motion.div>
+                      </motion.button>
+                    </div>
+                  </div>
                 </motion.div>
               ))}
+            </motion.div>
+
+            {/* Bottom CTA */}
+            <motion.div
+              className="text-center mt-16"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+            >
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                All tools are{" "}
+                <span className="font-bold text-purple-600 dark:text-purple-400">
+                  completely free
+                </span>{" "}
+                to use during our launch period
+              </p>
+              <motion.div
+                className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Zap className="h-4 w-4 text-yellow-500" />
+                No credit card required • No hidden fees
+              </motion.div>
             </motion.div>
           </div>
         </section>
@@ -985,54 +1136,141 @@ export default function AnimatedLanding() {
         {/* How It Works */}
         <section
           id="how-it-works"
-          className="py-20 bg-gray-50 dark:bg-gray-800"
+          className="py-20 bg-gray-50 dark:bg-gray-800 relative overflow-hidden"
         >
-          <div className="container mx-auto px-4">
+          {/* Decorative background circles */}
+          <div className="absolute top-0 left-0 w-72 h-72 bg-purple-100 dark:bg-purple-900/20 rounded-full blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute bottom-0 right-0 w-72 h-72 bg-blue-100 dark:bg-blue-900/20 rounded-full blur-3xl opacity-50 translate-x-1/2 translate-y-1/2"></div>
+
+          <div className="container mx-auto px-4 relative">
             <motion.div
-              ref={stepsRef}
               className="text-center mb-16"
               variants={fadeInUp}
               initial="hidden"
-              animate={stepsInView ? "visible" : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-                How It <span className="text-purple-700">Works</span>
+              <motion.div
+                className="inline-block mb-4"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, type: "spring" }}
+              >
+                <div className="bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 px-4 py-2 rounded-full text-sm font-semibold">
+                  Simple Process
+                </div>
+              </motion.div>
+
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+                How It{" "}
+                <span className="text-purple-700 dark:text-purple-500">
+                  Works
+                </span>
               </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-400">
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                 Get started with our ecosystem in just 4 simple steps
               </p>
             </motion.div>
+
             <motion.div
-              className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative"
               variants={staggerContainer}
               initial="hidden"
-              animate={stepsInView ? "visible" : "hidden"}
-              transition={{ delay: 0.3 }}
+              whileInView="visible"
+              viewport={{ once: true }}
             >
+              {/* Connecting lines for desktop */}
+              <div
+                className="hidden lg:block absolute top-8 left-0 right-0 h-0.5 bg-gray-300 dark:bg-gray-600"
+                style={{ width: "calc(100% - 8rem)", left: "4rem" }}
+              ></div>
+
               {steps.map((step, index) => (
                 <motion.div
                   key={step.number}
-                  className="text-center"
+                  className="relative"
                   variants={staggerItem}
-                  whileHover={{ y: -10, scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
                 >
                   <motion.div
-                    className="w-16 h-16 bg-purple-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.2 }}
+                    className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg border-2 border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 h-full"
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    {step.number}
+                    {/* Number circle */}
+                    <motion.div
+                      className="relative mb-6"
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div className="w-16 h-16 bg-purple-700 dark:bg-purple-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto shadow-lg relative z-10">
+                        {step.number}
+                      </div>
+
+                      {/* Checkmark overlay on hover */}
+                      <motion.div
+                        className="absolute inset-0 w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto opacity-0 hover:opacity-100 transition-opacity duration-300"
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <Check className="h-8 w-8" />
+                      </motion.div>
+
+                      {/* Decorative ring */}
+                      <div className="absolute inset-0 w-16 h-16 mx-auto">
+                        <div className="w-full h-full rounded-full border-2 border-purple-300 dark:border-purple-700 animate-ping opacity-20"></div>
+                      </div>
+                    </motion.div>
+
+                    {/* Arrow indicator for next step */}
+                    {index < steps.length - 1 && (
+                      <div className="hidden lg:block absolute -right-4 top-8 z-20">
+                        <motion.div
+                          animate={{ x: [0, 5, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                          <ArrowRight className="h-6 w-6 text-purple-400 dark:text-purple-600" />
+                        </motion.div>
+                      </div>
+                    )}
+
+                    {/* Content */}
+                    <div className="text-center">
+                      <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                        {step.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
+                        {step.description}
+                      </p>
+                    </div>
+
+                    {/* Bottom accent line */}
+                    <motion.div
+                      className="absolute bottom-0 left-0 h-1 bg-purple-700 dark:bg-purple-600 rounded-b-2xl"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "100%" }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: index * 0.2 }}
+                    ></motion.div>
                   </motion.div>
-                  <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                    {step.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {step.description}
-                  </p>
                 </motion.div>
               ))}
+            </motion.div>
+
+            {/* Bottom CTA */}
+            <motion.div
+              className="text-center mt-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+            >
+              <p className="text-gray-600 dark:text-gray-400 text-lg">
+                Ready to get started?{" "}
+                <span className="font-bold text-purple-700 dark:text-purple-500">
+                  Choose your first tool above!
+                </span>
+              </p>
             </motion.div>
           </div>
         </section>
