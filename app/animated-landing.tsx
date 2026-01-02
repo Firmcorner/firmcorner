@@ -29,6 +29,10 @@ import {
   Grid3x3,
   Sparkles,
   Check,
+  Bot,
+  Brain,
+  Wand2,
+  Cpu,
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
@@ -89,85 +93,88 @@ const features = [
 // Updated tools data with comprehensive information
 const toolsData = [
   {
-    name: "FirmCorner App",
-    shortDesc: "Connect & Discover",
-    description:
-      "Connect with top brands and discover products by category with our Instagram-style platform",
-    icon: Building2,
-    url: "https://app.firmcorner.com",
-    gradient: "from-blue-500 to-blue-700",
-    bgColor: "bg-blue-50 dark:bg-blue-950/30",
-    iconBg: "bg-blue-100 dark:bg-blue-900",
-    iconColor: "text-blue-700 dark:text-blue-300",
-    buttonColor: "bg-blue-600 hover:bg-blue-700",
-    accentIcon: Users,
-    features: [
-      "Brand Profiles",
-      "Product Discovery",
-      "User Voting",
-      "Social Features",
-    ],
-  },
-  {
     name: "Firm Mailer",
-    shortDesc: "Email Marketing",
+    shortDesc: "AI-Powered Email Marketing",
     description:
-      "Send personalized bulk emails to multiple recipients effortlessly with custom templates",
+      "Send personalized bulk emails with AI-generated content that converts.",
     icon: Mail,
-    url: "https://mailer.firmcorner.com/",
-    gradient: "from-green-500 to-emerald-700",
-    bgColor: "bg-green-50 dark:bg-green-950/30",
-    iconBg: "bg-green-100 dark:bg-green-900",
-    iconColor: "text-green-700 dark:text-green-300",
-    buttonColor: "bg-green-600 hover:bg-green-700",
-    accentIcon: Zap,
-    features: [
-      "Bulk Email Sending",
-      "Custom Templates",
-      "Multiple Providers",
-      "Easy Setup",
+    accentIcon: Bot,
+    gradient: "from-blue-500 to-blue-600",
+    bgColor: "bg-blue-50 dark:bg-blue-900/10",
+    iconColor: "text-blue-600",
+    buttonColor:
+      "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800",
+    url: "https://mailer.firmcorner.com",
+    aiFeatures: [
+      "AI writes compelling email content",
+      "Smart subject line generation",
+      "Personalization at scale",
+      "Automated follow-up sequences",
     ],
+    isNew: false,
   },
   {
     name: "Firm Invoice",
-    shortDesc: "Professional Invoicing",
+    shortDesc: "AI-Enhanced Invoicing",
     description:
-      "Create professional white-labeled invoices with your company branding and multiple templates",
+      "Create professional invoices with AI-powered automation and smart insights.",
     icon: FileText,
+    accentIcon: Brain,
+    gradient: "from-purple-500 to-purple-600",
+    bgColor: "bg-purple-50 dark:bg-purple-900/10",
+    iconColor: "text-purple-600",
+    buttonColor:
+      "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800",
     url: "https://invoice.firmcorner.com",
-    gradient: "from-purple-500 to-purple-700",
-    bgColor: "bg-purple-50 dark:bg-purple-950/30",
-    iconBg: "bg-purple-100 dark:bg-purple-900",
-    iconColor: "text-purple-700 dark:text-purple-300",
-    buttonColor: "bg-purple-600 hover:bg-purple-700",
-    accentIcon: TrendingUp,
-    features: [
-      "White-labeled Invoices",
-      "Company Branding",
-      "Multiple Templates",
-      "Professional Design",
+    aiFeatures: [
+      "Auto-populate invoice details",
+      "Smart tax calculations",
+      "Payment prediction insights",
+      "Automated reminders",
     ],
+    isNew: false,
   },
   {
     name: "Firm Viewer",
-    shortDesc: "Data Management",
+    shortDesc: "AI-Driven Data Analysis",
     description:
-      "Powerful CSV/Excel file manager with editing, filtering, and export capabilities for seamless data handling",
+      "Analyze and edit CSV/Excel files with intelligent AI assistance.",
     icon: FileSpreadsheet,
+    accentIcon: Wand2,
+    gradient: "from-green-500 to-green-600",
+    bgColor: "bg-green-50 dark:bg-green-900/10",
+    iconColor: "text-green-600",
+    buttonColor:
+      "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800",
     url: "https://viewer.firmcorner.com",
-    gradient: "from-emerald-500 to-green-700",
-    bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
-    iconBg: "bg-emerald-100 dark:bg-emerald-900",
-    iconColor: "text-emerald-700 dark:text-emerald-300",
-    buttonColor: "bg-emerald-600 hover:bg-emerald-700",
-    accentIcon: Sparkles,
-    isNew: true,
-    features: [
-      "CSV/Excel Support",
-      "Data Editing",
-      "Advanced Filtering",
-      "Instant Export",
+    aiFeatures: [
+      "AI-powered data insights",
+      "Smart pattern detection",
+      "Automated data cleaning",
+      "Intelligent filtering suggestions",
     ],
+    isNew: true,
+  },
+  {
+    name: "Coming Soon",
+    shortDesc: "More AI Tools Ahead",
+    description:
+      "We're building more AI-powered tools to revolutionize your business workflow.",
+    icon: Sparkles,
+    accentIcon: TrendingUp,
+    gradient: "from-orange-500 to-orange-600",
+    bgColor: "bg-orange-50 dark:bg-orange-900/10",
+    iconColor: "text-orange-600",
+    buttonColor:
+      "bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800",
+    url: "#",
+    aiFeatures: [
+      "AI content generation",
+      "Smart automation",
+      "Predictive analytics",
+      "Voice-powered features",
+    ],
+    isNew: false,
   },
 ];
 
@@ -266,6 +273,7 @@ export default function AnimatedLanding() {
   const { ref: stepsRef, isInView: stepsInView } = useScrollAnimation();
   const { ref: contactRef, isInView: contactInView } = useScrollAnimation();
   const { ref: ctaRef, isInView: ctaInView } = useScrollAnimation();
+  const [hoveredBrand, setHoveredBrand] = useState<any>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -445,140 +453,333 @@ export default function AnimatedLanding() {
 
       <main className={showAnnouncement ? "pt-20" : ""}>
         {/* Hero Section */}
-        <section className="min-h-screen flex items-center justify-center pt-20 bg-gray-50 dark:bg-gray-800">
-          <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+        <section className="min-h-screen flex items-center justify-center pt-20 bg-gradient-to-br from-gray-50 via-purple-50/30 to-blue-50/30 dark:from-gray-800 dark:via-purple-900/10 dark:to-blue-900/10 relative overflow-hidden">
+          {/* Animated AI Background Elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <motion.div
-              ref={heroRef}
+              className="absolute top-20 left-10 w-32 h-32 bg-purple-400/20 rounded-full blur-3xl"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3],
+              }}
+              transition={{ duration: 4, repeat: Infinity }}
+            />
+            <motion.div
+              className="absolute bottom-20 right-10 w-40 h-40 bg-blue-400/20 rounded-full blur-3xl"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.3, 0.5, 0.3],
+              }}
+              transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+            />
+            <motion.div
+              className="absolute top-1/2 left-1/3 w-24 h-24 bg-pink-400/20 rounded-full blur-2xl"
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0.2, 0.4, 0.2],
+              }}
+              transition={{ duration: 6, repeat: Infinity, delay: 2 }}
+            />
+          </div>
+
+          <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            {/* Left Column - Content */}
+            <motion.div
               className="space-y-8"
               variants={slideInLeft}
               initial="hidden"
-              animate={heroInView ? "visible" : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
+              {/* AI Badge */}
+              <motion.div
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/50 dark:to-blue-900/50 text-purple-700 dark:text-purple-300 px-4 py-2 rounded-full text-sm font-bold border-2 border-purple-300 dark:border-purple-700"
+                variants={fadeInUp}
+                animate={{
+                  boxShadow: [
+                    "0 0 0 0 rgba(147, 51, 234, 0)",
+                    "0 0 0 8px rgba(147, 51, 234, 0.1)",
+                    "0 0 0 0 rgba(147, 51, 234, 0)",
+                  ],
+                }}
+              >
+                <Bot className="h-4 w-4" />
+                AI-Powered Business Suite
+                <Sparkles className="h-4 w-4 text-yellow-500" />
+              </motion.div>
+
+              {/* Main Heading */}
               <motion.h1
-                className="text-2xl font-bold leading-snug text-gray-900 dark:text-white md:text-4xl"
+                className="text-3xl font-bold leading-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl"
                 variants={fadeInUp}
                 transition={{ delay: 0.2 }}
               >
-                FirmCorner <span className="text-purple-700">Ecosystem</span>
+                FirmCorner{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+                  AI Ecosystem
+                </span>
                 <br />
-                Connect, Create & Grow.
+                <span className="text-2xl md:text-3xl lg:text-4xl text-gray-700 dark:text-gray-300">
+                  Work Smarter with AI
+                </span>
               </motion.h1>
 
+              {/* Description */}
               <motion.p
-                className="text-xl text-gray-600 leading-relaxed dark:text-gray-400"
+                className="text-lg md:text-xl text-gray-600 leading-relaxed dark:text-gray-400"
                 variants={fadeInUp}
                 transition={{ delay: 0.4 }}
               >
-                Your all-in-one business toolkit. Connect with brands, send bulk
-                emails, create professional invoices, and build your community -
-                all under one powerful ecosystem.
+                Your AI-powered business toolkit. Let artificial intelligence
+                handle the heavy lifting while you focus on growth. From smart
+                email campaigns to intelligent data analysis - all automated and
+                optimized.
               </motion.p>
+
+              {/* CTA Buttons */}
               <motion.div
                 className="flex flex-col sm:flex-row gap-4"
                 variants={fadeInUp}
                 transition={{ delay: 0.6 }}
               >
                 <motion.button
-                  className="bg-purple-700 hover:bg-purple-800 text-white px-6 sm:px-8 py-3 text-base sm:text-lg rounded-lg transition-all duration-300 inline-flex items-center justify-center w-full sm:w-auto hover:scale-105"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 sm:px-8 py-3.5 text-base sm:text-lg rounded-xl transition-all duration-300 inline-flex items-center justify-center w-full sm:w-auto shadow-lg hover:shadow-xl font-semibold"
                   onClick={() =>
                     window.open("https://app.firmcorner.com", "_blank")
                   }
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.2 }}
                 >
-                  Explore Firm Corner App
+                  Try Firmcorner App
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </motion.button>
                 <motion.button
-                  className="bg-white text-purple-700 hover:bg-gray-100 px-6 sm:px-8 py-3 text-base sm:text-lg rounded-lg transition-all duration-300 inline-flex items-center justify-center w-full sm:w-auto border border-purple-700 hover:scale-105"
+                  className="bg-white dark:bg-gray-800 text-purple-700 dark:text-purple-400 hover:bg-gray-50 dark:hover:bg-gray-700 px-6 sm:px-8 py-3.5 text-base sm:text-lg rounded-xl transition-all duration-300 inline-flex items-center justify-center w-full sm:w-auto border-2 border-purple-300 dark:border-purple-700 shadow-md hover:shadow-lg font-semibold"
                   onClick={() =>
                     document
                       .getElementById("our-tools")
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.2 }}
                 >
-                  View All Tools
+                  <Bot className="mr-2 h-5 w-5" />
+                  Explore AI Features
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </motion.button>
               </motion.div>
+
+              {/* Stats with AI Theme */}
               <motion.div
-                className="flex items-center space-x-6 pt-4"
+                className="flex flex-wrap items-center gap-6 pt-4"
                 variants={staggerContainer}
                 initial="hidden"
-                animate={heroInView ? "visible" : "hidden"}
+                whileInView="visible"
+                viewport={{ once: true }}
                 transition={{ delay: 0.8 }}
               >
                 {[
                   {
-                    icon: TrendingUp,
-                    text: "Growing Fast",
-                    color: "text-green-600",
+                    icon: Cpu,
+                    text: "AI-Powered",
+                    color: "text-purple-600",
+                    bg: "bg-purple-100 dark:bg-purple-900/30",
                   },
-                  { icon: Users, text: "10K+ Users", color: "text-blue-600" },
+                  {
+                    icon: Users,
+                    text: "10K+ Users",
+                    color: "text-blue-600",
+                    bg: "bg-blue-100 dark:bg-blue-900/30",
+                  },
                   {
                     icon: Zap,
-                    text: "3 Tools & Counting",
+                    text: "3 AI Tools",
                     color: "text-yellow-600",
+                    bg: "bg-yellow-100 dark:bg-yellow-900/30",
                   },
                 ].map((item, index) => (
                   <motion.div
                     key={item.text}
-                    className="flex items-center space-x-2"
+                    className={`flex items-center gap-2 ${item.bg} px-4 py-2 rounded-full`}
                     variants={staggerItem}
+                    whileHover={{ scale: 1.05, y: -2 }}
                   >
                     <item.icon className={`h-5 w-5 ${item.color}`} />
-                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                       {item.text}
                     </span>
                   </motion.div>
                 ))}
               </motion.div>
+
+              {/* AI Feature Highlight */}
+              <motion.div
+                className="bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/20 dark:to-blue-900/20 rounded-2xl p-6 border-2 border-purple-200 dark:border-purple-800"
+                variants={fadeInUp}
+                transition={{ delay: 1 }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="flex items-start gap-4">
+                  <motion.div
+                    className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center flex-shrink-0"
+                    animate={{ rotate: [0, 5, -5, 0] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  >
+                    <Sparkles className="h-6 w-6 text-white" />
+                  </motion.div>
+                  <div>
+                    <h3 className="font-bold text-gray-900 dark:text-white mb-1">
+                      AI Does the Heavy Lifting
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Our AI automatically generates content, analyzes data, and
+                      optimizes your workflow - saving you hours every day
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
+
+            {/* Right Column - Brand Cards with AI Enhancement */}
             <motion.div
               className="relative"
               variants={slideInRight}
               initial="hidden"
-              animate={heroInView ? "visible" : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
             >
+              {/* Floating AI Icon */}
               <motion.div
-                className="grid grid-cols-2 gap-4"
+                className="absolute -top-6 -left-6 w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl z-20"
+                animate={{
+                  y: [0, -10, 0],
+                  rotate: [0, 5, -5, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <Brain className="h-8 w-8 text-white" />
+              </motion.div>
+
+              <motion.div
+                className="grid grid-cols-2 gap-4 relative"
                 variants={staggerContainer}
                 initial="hidden"
-                animate={heroInView ? "visible" : "hidden"}
+                whileInView="visible"
+                viewport={{ once: true }}
                 transition={{ delay: 0.5 }}
               >
                 {brands.map((brand, index) => (
                   <motion.div
                     key={brand.name}
                     variants={staggerItem}
+                    onHoverStart={() => setHoveredBrand(index)}
+                    onHoverEnd={() => setHoveredBrand(null)}
                     whileHover={{ scale: 1.05, y: -5 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Card className="border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800">
-                      <CardContent className="flex flex-col items-center justify-center p-6 text-center space-y-3">
-                        <Image
-                          src={brand.icon || "/placeholder.svg"}
-                          alt={brand.name}
-                          width={80}
-                          height={50}
-                          className="object-contain"
-                        />
+                    <div className="relative border-2 border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-600 hover:shadow-xl transition-all duration-300 bg-white dark:bg-gray-800 rounded-2xl overflow-hidden">
+                      {/* AI Glow Effect */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10 opacity-0"
+                        animate={{
+                          opacity: hoveredBrand === index ? 1 : 0,
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
+
+                      {/* AI Badge on Card */}
+                      {hoveredBrand === index && (
+                        <motion.div
+                          className="absolute top-2 right-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1"
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <Bot className="h-3 w-3" />
+                          Firm Corner
+                        </motion.div>
+                      )}
+
+                      <div className="relative flex flex-col items-center justify-center p-6 text-center space-y-3">
+                        {/* Brand Icon/Emoji with AI pulse */}
+                        <motion.div
+                          className="text-5xl relative"
+                          animate={
+                            hoveredBrand === index
+                              ? {
+                                  scale: [1, 1.1, 1],
+                                }
+                              : {}
+                          }
+                          transition={{ duration: 0.5 }}
+                        >
+                          <Image
+                            src={brand.icon || "/placeholder.svg"}
+                            alt={brand.name}
+                            width={80}
+                            height={50}
+                            className="object-contain"
+                          />
+
+                          {hoveredBrand === index && (
+                            <motion.div
+                              className="absolute -inset-2 border-2 border-purple-400 rounded-full"
+                              initial={{ scale: 0.8, opacity: 0 }}
+                              animate={{ scale: 1.5, opacity: 0 }}
+                              transition={{ duration: 1, repeat: Infinity }}
+                            />
+                          )}
+                        </motion.div>
+
                         <div className="font-semibold text-gray-700 dark:text-gray-300">
                           {brand.name}
                         </div>
-                      </CardContent>
-                    </Card>
+                      </div>
+                    </div>
                   </motion.div>
                 ))}
               </motion.div>
+
+              {/* Floating particles effect */}
+              <motion.div
+                className="absolute -bottom-4 -right-4 w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-2xl opacity-30"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.5, 0.3],
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
             </motion.div>
           </div>
+
+          {/* Bottom Scroll Indicator */}
+          <motion.div
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <div className="flex flex-col items-center gap-2 text-gray-400">
+              <span className="text-xs font-medium">Powered by AI</span>
+              <motion.div
+                className="w-6 h-10 border-2 border-gray-300 dark:border-gray-600 rounded-full p-1"
+                whileHover={{ borderColor: "#9333ea" }}
+              >
+                <motion.div
+                  className="w-1.5 h-3 bg-purple-600 rounded-full mx-auto"
+                  animate={{ y: [0, 12, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+              </motion.div>
+            </div>
+          </motion.div>
         </section>
 
         {/* Features Section */}
@@ -951,6 +1152,7 @@ export default function AnimatedLanding() {
           className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"
         >
           <div className="container mx-auto px-4">
+            {/* Header */}
             <motion.div
               className="text-center mb-16"
               variants={fadeInUp}
@@ -959,24 +1161,38 @@ export default function AnimatedLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
+              {/* AI Badge with animation */}
               <motion.div
-                className="inline-flex items-center gap-2 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 px-4 py-2 rounded-full text-sm font-medium mb-6"
-                animate={{ scale: [1, 1.05, 1] }}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/50 dark:to-blue-900/50 text-purple-700 dark:text-purple-300 px-5 py-2.5 rounded-full text-sm font-bold mb-6 border-2 border-purple-200 dark:border-purple-700"
+                animate={{
+                  scale: [1, 1.05, 1],
+                  boxShadow: [
+                    "0 0 0 0 rgba(147, 51, 234, 0)",
+                    "0 0 0 10px rgba(147, 51, 234, 0.1)",
+                    "0 0 0 0 rgba(147, 51, 234, 0)",
+                  ],
+                }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <Sparkles className="h-4 w-4" />
-                Complete Business Suite
+                <Bot className="h-5 w-5" />
+                AI-Powered Business Suite
+                <Sparkles className="h-4 w-4 text-yellow-500" />
               </motion.div>
 
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-                Our <span className="text-purple-700">Powerful Tools</span>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
+                Meet Your{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+                  AI Business Assistant
+                </span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto dark:text-gray-400">
-                Complete business solutions designed to help you grow, connect,
-                and succeed
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto dark:text-gray-400 leading-relaxed">
+                Every tool in our ecosystem is supercharged with artificial
+                intelligence to help you work smarter, faster, and more
+                efficiently
               </p>
             </motion.div>
 
+            {/* Tools Grid */}
             <motion.div
               className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
               variants={staggerContainer}
@@ -1011,7 +1227,7 @@ export default function AnimatedLanding() {
                     {/* New badge */}
                     {tool.isNew && (
                       <motion.div
-                        className="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+                        className="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg z-10"
                         animate={{
                           scale: [1, 1.1, 1],
                           rotate: [0, 5, -5, 0],
@@ -1035,9 +1251,9 @@ export default function AnimatedLanding() {
                       >
                         <tool.icon className="h-8 w-8 text-white" />
 
-                        {/* Accent icon */}
+                        {/* AI Badge on icon */}
                         <motion.div
-                          className="absolute -top-2 -right-2 w-7 h-7 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-md"
+                          className="absolute -top-2 -right-2 w-7 h-7 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-md border-2 border-purple-400"
                           animate={{
                             scale: hoveredTool === index ? [1, 1.2, 1] : 1,
                           }}
@@ -1052,7 +1268,7 @@ export default function AnimatedLanding() {
                         </motion.div>
                       </motion.div>
 
-                      {/* Tool name and short description */}
+                      {/* Tool name and description */}
                       <div className="mb-4">
                         <h3 className="text-xl font-bold mb-1 text-gray-900 dark:text-white">
                           {tool.name}
@@ -1062,24 +1278,30 @@ export default function AnimatedLanding() {
                         </p>
                       </div>
 
-                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4 flex-grow">
+                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
                         {tool.description}
                       </p>
 
-                      {/* Features list */}
-                      <div className="mb-5">
+                      {/* AI Features list */}
+                      <div className="mb-5 flex-grow">
+                        <div className="flex items-center gap-2 mb-3">
+                          <Brain className={`h-4 w-4 ${tool.iconColor}`} />
+                          <span className="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
+                            AI Features
+                          </span>
+                        </div>
                         <ul className="space-y-2">
-                          {tool.features.map((feature, featureIndex) => (
+                          {tool.aiFeatures.map((feature, featureIndex) => (
                             <motion.li
                               key={featureIndex}
-                              className="flex items-center text-sm text-gray-700 dark:text-gray-300"
+                              className="flex items-start text-sm text-gray-700 dark:text-gray-300"
                               initial={{ opacity: 0, x: -10 }}
                               whileInView={{ opacity: 1, x: 0 }}
                               viewport={{ once: true }}
                               transition={{ delay: featureIndex * 0.1 }}
                             >
-                              <Star className="h-3.5 w-3.5 text-yellow-500 mr-2 flex-shrink-0 fill-yellow-500" />
-                              {feature}
+                              <Sparkles className="h-3.5 w-3.5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
+                              <span>{feature}</span>
                             </motion.li>
                           ))}
                         </ul>
@@ -1087,18 +1309,36 @@ export default function AnimatedLanding() {
 
                       {/* CTA Button */}
                       <motion.button
-                        className={`w-full ${tool.buttonColor} text-white px-6 py-3 rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl`}
-                        onClick={() => window.open(tool.url, "_blank")}
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.97 }}
+                        className={`w-full ${
+                          tool.buttonColor
+                        } text-white px-6 py-3 rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl ${
+                          tool.url === "#"
+                            ? "opacity-50 cursor-not-allowed"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          tool.url !== "#" && window.open(tool.url, "_blank")
+                        }
+                        whileHover={tool.url !== "#" ? { scale: 1.03 } : {}}
+                        whileTap={tool.url !== "#" ? { scale: 0.97 } : {}}
+                        disabled={tool.url === "#"}
                       >
-                        Launch {tool.name.split(" ")[1]}
-                        <motion.div
-                          animate={{ x: hoveredTool === index ? 3 : 0 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <ArrowRight className="h-4 w-4" />
-                        </motion.div>
+                        {tool.url === "#" ? (
+                          <>
+                            <Zap className="h-4 w-4" />
+                            Stay Tuned
+                          </>
+                        ) : (
+                          <>
+                            Launch {tool.name.split(" ")[1]}
+                            <motion.div
+                              animate={{ x: hoveredTool === index ? 3 : 0 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              <ArrowRight className="h-4 w-4" />
+                            </motion.div>
+                          </>
+                        )}
                       </motion.button>
                     </div>
                   </div>
@@ -1106,29 +1346,97 @@ export default function AnimatedLanding() {
               ))}
             </motion.div>
 
-            {/* Bottom CTA */}
+            {/* Bottom AI Highlight Section */}
             <motion.div
-              className="text-center mt-16"
-              initial={{ opacity: 0, y: 20 }}
+              className="mt-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl relative overflow-hidden"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.6 }}
             >
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                All tools are{" "}
-                <span className="font-bold text-purple-600 dark:text-purple-400">
-                  completely free
-                </span>{" "}
-                to use during our launch period
-              </p>
-              <motion.div
-                className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Zap className="h-4 w-4 text-yellow-500" />
-                No credit card required • No hidden fees
-              </motion.div>
+              {/* Animated background pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute top-0 left-0 w-40 h-40 bg-white rounded-full blur-3xl animate-pulse"></div>
+                <div
+                  className="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full blur-3xl animate-pulse"
+                  style={{ animationDelay: "1s" }}
+                ></div>
+              </div>
+
+              <div className="relative z-10">
+                <motion.div
+                  className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-bold mb-4"
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <Bot className="h-5 w-5" />
+                  Powered by Advanced AI
+                </motion.div>
+
+                <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                  Why AI Makes the Difference
+                </h3>
+
+                <p className="text-lg text-purple-100 mb-8 max-w-3xl mx-auto">
+                  Our AI doesn't just automate tasks—it understands context,
+                  learns from patterns, and provides intelligent suggestions
+                  that help you make better business decisions
+                </p>
+
+                <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                  <motion.div
+                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundColor: "rgba(255,255,255,0.15)",
+                    }}
+                  >
+                    <Brain className="h-8 w-8 mx-auto mb-3" />
+                    <h4 className="font-bold mb-2">Smart Learning</h4>
+                    <p className="text-sm text-purple-100">
+                      AI adapts to your workflow and improves over time
+                    </p>
+                  </motion.div>
+
+                  <motion.div
+                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundColor: "rgba(255,255,255,0.15)",
+                    }}
+                  >
+                    <Zap className="h-8 w-8 mx-auto mb-3" />
+                    <h4 className="font-bold mb-2">Lightning Fast</h4>
+                    <p className="text-sm text-purple-100">
+                      Complete hours of work in seconds with AI automation
+                    </p>
+                  </motion.div>
+
+                  <motion.div
+                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundColor: "rgba(255,255,255,0.15)",
+                    }}
+                  >
+                    <Star className="h-8 w-8 mx-auto mb-3" />
+                    <h4 className="font-bold mb-2">Better Results</h4>
+                    <p className="text-sm text-purple-100">
+                      AI-powered insights lead to smarter decisions
+                    </p>
+                  </motion.div>
+                </div>
+
+                <motion.div
+                  className="mt-8 inline-flex items-center gap-2 text-sm"
+                  animate={{ opacity: [0.7, 1, 0.7] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <Sparkles className="h-4 w-4 text-yellow-300" />
+                  All tools are completely free during launch • No credit card
+                  required
+                </motion.div>
+              </div>
             </motion.div>
           </div>
         </section>
