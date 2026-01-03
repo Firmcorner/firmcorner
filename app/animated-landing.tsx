@@ -43,6 +43,7 @@ import mcd from "@/Assets/Images/mcdonald.svg";
 import spot from "@/Assets/Images/spotify.svg";
 import insta from "@/Assets/Images/instagram.svg";
 import Linkedin from "@/Assets/Images/linkedin.svg";
+import FirmAISection from "@/components/firmai";
 
 const brands = [
   { name: "Apple", icon: apple },
@@ -436,10 +437,10 @@ export default function AnimatedLanding() {
         >
           <p className="text-sm md:text-base font-medium">
             ✨ New Product Launch:{" "}
-            <a href="#newlaunch" className="underline hover:text-purple-100">
-              Firm Viewer
+            <a href="#firmai" className="underline hover:text-purple-100">
+              Firm AI
             </a>{" "}
-            is here! Powerful Edit CSVs and Excel files in seconds.
+            is here! Your AI-powered business consultant.
           </p>
           <button
             onClick={() => setShowAnnouncement(false)}
@@ -886,264 +887,11 @@ export default function AnimatedLanding() {
 
         {/* Recently Launched Section */}
         <section
-          id="newlaunch"
+          id="firmai"
           className="py-20 bg-white-to-br from-purple-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 relative overflow-hidden"
         >
           {/* Background decoration */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-10 left-10 w-32 h-32 bg-purple-600 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-10 right-10 w-40 h-40 bg-indigo-600 rounded-full blur-3xl"></div>
-          </div>
-
-          <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-20 px-4">
-            <div className="max-w-7xl mx-auto">
-              {/* Header */}
-              <motion.div
-                className="text-center mb-16"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <motion.div
-                  className="inline-flex items-center gap-2 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 px-4 py-2 rounded-full text-sm font-medium mb-6"
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <Sparkles className="h-4 w-4" />
-                  Recently Launched
-                </motion.div>
-
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                  Introducing{" "}
-                  <span className="text-purple-600 dark:text-purple-400">
-                    Firm Viewer
-                  </span>
-                </h1>
-
-                <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-                  Manage and edit your CSV/Excel files with powerful filtering
-                  and data visualization.
-                  <br />
-                  The newest addition to our growing ecosystem of business
-                  tools.
-                </p>
-              </motion.div>
-
-              {/* Main Content Grid */}
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
-                {/* Left side - Product card */}
-                <motion.div
-                  className="relative"
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                  <motion.div
-                    className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700"
-                    whileHover={{ y: -5 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {/* Card Header */}
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                          <FileSpreadsheet className="h-6 w-6 text-white" />
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                            Firm Viewer
-                          </h3>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            Professional Data Manager
-                          </p>
-                        </div>
-                      </div>
-                      <span className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 px-3 py-1 rounded-full text-xs font-medium">
-                        NEW
-                      </span>
-                    </div>
-
-                    {/* Mock spreadsheet preview */}
-                    <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-xl p-4 mb-6 border border-gray-200 dark:border-gray-600">
-                      {/* Toolbar */}
-                      <div className="flex items-center gap-2 mb-3 pb-3 border-b border-gray-300 dark:border-gray-600">
-                        <div className="w-6 h-6 bg-green-500 rounded flex items-center justify-center">
-                          <Grid3x3 className="h-3 w-3 text-white" />
-                        </div>
-                        <div className="flex-1 bg-white dark:bg-gray-700 rounded px-2 py-1">
-                          <div className="w-24 h-2 bg-gray-300 dark:bg-gray-600 rounded"></div>
-                        </div>
-                        <div className="flex gap-1">
-                          <div className="w-5 h-5 bg-blue-400 rounded"></div>
-                          <div className="w-5 h-5 bg-green-400 rounded"></div>
-                          <div className="w-5 h-5 bg-orange-400 rounded"></div>
-                        </div>
-                      </div>
-
-                      {/* Table header with Excel green accent */}
-                      <div className="grid grid-cols-4 gap-2 mb-2">
-                        <div className="w-full h-3 bg-green-500 rounded"></div>
-                        <div className="w-full h-3 bg-green-500 rounded"></div>
-                        <div className="w-full h-3 bg-green-500 rounded"></div>
-                        <div className="w-full h-3 bg-green-500 rounded"></div>
-                      </div>
-
-                      {/* Table rows */}
-                      <div className="space-y-2">
-                        {[1, 2, 3, 4, 5].map((row) => (
-                          <div key={row} className="grid grid-cols-4 gap-2">
-                            <div className="w-full h-2.5 bg-white dark:bg-gray-700 rounded shadow-sm"></div>
-                            <div className="w-full h-2.5 bg-white dark:bg-gray-700 rounded shadow-sm"></div>
-                            <div className="w-full h-2.5 bg-white dark:bg-gray-700 rounded shadow-sm"></div>
-                            <div className="w-full h-2.5 bg-white dark:bg-gray-700 rounded shadow-sm"></div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* CTA Button */}
-                    <motion.button
-                      className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-6 py-3.5 rounded-lg transition-all duration-300 font-medium flex items-center justify-center gap-2 shadow-lg"
-                      onClick={() =>
-                        window.open("https://viewer.firmcorner.com", "_blank")
-                      }
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <FileSpreadsheet className="h-4 w-4" />
-                      Try Firm Viewer Now
-                    </motion.button>
-                  </motion.div>
-
-                  {/* Floating badge */}
-                  <motion.div
-                    className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-xl"
-                    animate={{
-                      y: [0, -8, 0],
-                      rotate: [0, 5, 0, -5, 0],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    <Sparkles className="h-7 w-7 text-white" />
-                  </motion.div>
-                </motion.div>
-
-                {/* Right side - Features */}
-                <motion.div
-                  className="space-y-6"
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                >
-                  {/* Feature 1 */}
-                  <motion.div
-                    className="flex items-start gap-4"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900 flex items-center justify-center flex-shrink-0">
-                      <Upload className="h-5 w-5 text-purple-700 dark:text-purple-300" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
-                        Easy File Upload
-                      </h4>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Upload CSV and Excel files instantly with drag-and-drop
-                        support. Compatible with XLSX, XLS, and CSV formats.
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  {/* Feature 2 */}
-                  <motion.div
-                    className="flex items-start gap-4"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900 flex items-center justify-center flex-shrink-0">
-                      <Edit3 className="h-5 w-5 text-green-700 dark:text-green-300" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
-                        Full Data Editing
-                      </h4>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Edit cells directly in your browser. Update, modify, and
-                        delete rows with an intuitive spreadsheet interface.
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  {/* Feature 3 */}
-                  <motion.div
-                    className="flex items-start gap-4"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0">
-                      <Filter className="h-5 w-5 text-blue-700 dark:text-blue-300" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
-                        Advanced Filtering
-                      </h4>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Apply powerful filters to find exactly what you need.
-                        Sort, search, and filter by any column efficiently.
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  {/* Feature 4 */}
-                  <motion.div
-                    className="flex items-start gap-4"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-900 flex items-center justify-center flex-shrink-0">
-                      <Download className="h-5 w-5 text-orange-700 dark:text-orange-300" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2 dark:text-white">
-                        Instant Export
-                      </h4>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Download your edited data instantly as CSV or Excel. All
-                        your changes are preserved perfectly.
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  {/* Launch Special Card */}
-                  <motion.div
-                    className="bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-xl p-6 border border-yellow-200 dark:border-yellow-800"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <Zap className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
-                      <span className="text-sm font-semibold text-yellow-700 dark:text-yellow-400">
-                        Launch Special
-                      </span>
-                    </div>
-                    <h4 className="text-lg font-bold text-gray-900 mb-2 dark:text-white">
-                      Free to Use
-                    </h4>
-                    <p className="text-gray-700 dark:text-gray-300 text-sm">
-                      Celebrate our launch with completely free access to all
-                      Firm Viewer features. No hidden costs, no subscriptions
-                      required.
-                    </p>
-                  </motion.div>
-                </motion.div>
-              </div>
-            </div>
-          </div>
+          <FirmAISection />
         </section>
 
         {/* Our Tools Section */}
