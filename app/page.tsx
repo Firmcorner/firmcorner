@@ -3,14 +3,23 @@ import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import AnimatedLanding from "./animated-landing";
 import BusinessLoader from "../components/loader";
+import Navbar from "@/components/navbar"; // Import the Navbar component
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
+  const [scrollY, setScrollY] = useState(0);
+  const [theme, setTheme] = useState("light");
+  const [showAnnouncement, setShowAnnouncement] = useState(true);
 
-  // Optional: Add minimum loading time to ensure users see the splash
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   useEffect(() => {
     const minLoadTime = setTimeout(() => {
-      // This ensures loader shows for at least 3 seconds
+      // Optional minimum load time
     }, 3000);
 
     return () => clearTimeout(minLoadTime);
@@ -21,7 +30,24 @@ export default function Page() {
   };
 
   return (
-    <>
+    <div
+      className={`min-h-screen transition-colors duration-300 ${
+        theme === "dark"
+          ? "dark bg-gray-900 text-white"
+          : "bg-white text-gray-900"
+      }`}
+    >
+      {/* Global Navbar - Always visible */}
+      {!isLoading && (
+        <Navbar
+          theme={theme}
+          setTheme={setTheme}
+          scrollY={scrollY}
+          showAnnouncement={showAnnouncement}
+          setShowAnnouncement={setShowAnnouncement}
+        />
+      )}
+
       <AnimatePresence mode="wait">
         {isLoading ? (
           <BusinessLoader
@@ -32,6 +58,6 @@ export default function Page() {
           <AnimatedLanding key="main" />
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }
